@@ -105,11 +105,11 @@ public class Teacher {
 	}
 
 	public ArrayList<Course> getCourses_list() {
-		return courses_list;
+		return courses;
 	}
 
-	public void setCourses_list(ArrayList<Course> courses_list) {
-		this.courses_list = courses_list;
+	public void setCourses_list(ArrayList<Course> courses) {
+		this.courses = courses;
 	}
 
 	@Id
@@ -128,7 +128,7 @@ public class Teacher {
 	
 	@OneToMany(mappedBy = "teacher",targetEntity = Course.class,cascade = CascadeType.ALL)
 	@OnDelete(action = OnDeleteAction.CASCADE)
-	private ArrayList<Course> courses_list;
+	private ArrayList<Course> courses;
 
 	public Teacher() {
 		

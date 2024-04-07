@@ -36,9 +36,9 @@ public class Course {
 	private Time end_time;
 	private int lectures_taken;
 	
-	@ManyToMany(mappedBy = "courses_list", targetEntity = Student.class, cascade = CascadeType.ALL)
+	@ManyToMany(mappedBy = "courses", targetEntity = Student.class, cascade = CascadeType.ALL)
 	@OnDelete(action = OnDeleteAction.CASCADE)
-	private ArrayList<Student> students_list;
+	private ArrayList<Student> students;
 	
 	@ManyToOne(targetEntity = Teacher.class,cascade = CascadeType.ALL)
 	@OnDelete(action = OnDeleteAction.CASCADE)
@@ -144,11 +144,11 @@ public class Course {
 	}
 
 	public ArrayList<Student> getStudents_list() {
-		return students_list;
+		return students;
 	}
 
-	public void setStudents_list(ArrayList<Student> students_list) {
-		this.students_list = students_list;
+	public void setStudents_list(ArrayList<Student> students) {
+		this.students = students;
 	}
 
 	public Course() {

@@ -22,11 +22,11 @@ public class Student {
 	private String password;
 	private String email;
 	public ArrayList<Course> getCourses_list() {
-		return courses_list;
+		return courses;
 	}
 
-	public void setCourses_list(ArrayList<Course> courses_list) {
-		this.courses_list = courses_list;
+	public void setCourses_list(ArrayList<Course> courses) {
+		this.courses = courses;
 	}
 
 	private String phone_number;
@@ -41,7 +41,7 @@ public class Student {
 	@ManyToMany(targetEntity = Course.class, cascade = { CascadeType.MERGE, CascadeType.PERSIST,
 			CascadeType.REFRESH })
 	@OnDelete(action = OnDeleteAction.CASCADE)
-	private ArrayList<Course> courses_list;
+	private ArrayList<Course> courses;
 	public int getStud_id() {
 		return stud_id;
 	}
