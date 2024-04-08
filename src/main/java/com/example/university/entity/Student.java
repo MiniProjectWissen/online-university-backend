@@ -21,14 +21,6 @@ public class Student {
 	private int stud_id;
 	private String password;
 	private String email;
-	public ArrayList<Course> getCourses_list() {
-		return courses;
-	}
-
-	public void setCourses_list(ArrayList<Course> courses) {
-		this.courses = courses;
-	}
-
 	private String phone_number;
 	private String first_name;
 	private String last_name;
@@ -42,6 +34,19 @@ public class Student {
 			CascadeType.REFRESH })
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private ArrayList<Course> courses;
+	
+	public Student() {
+		
+	}
+	
+	public ArrayList<Course> getCourses_list() {
+		return courses;
+	}
+
+	public void setCourses_list(ArrayList<Course> courses) {
+		this.courses = courses;
+	}
+	
 	public int getStud_id() {
 		return stud_id;
 	}
@@ -128,10 +133,6 @@ public class Student {
 
 	public void setStandard(int standard) {
 		this.standard = standard;
-	}
-
-	public Student() {
-		
 	}
 
 }
