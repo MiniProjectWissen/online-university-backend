@@ -12,10 +12,38 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+
 public class Teacher {
 	
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int teacher_id;
+	private String password;
+	private String email;
+	private String phone_number;
+	private String first_name;
+	private String last_name;
+	private Date dob;
+	private String gender;
+	private String address;
+	private String position;
+	private int is_admin;
+	
+	@OneToMany(mappedBy = "teacher",targetEntity = Course.class,cascade = CascadeType.ALL)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	private ArrayList<Course> courses;
+
 	public int getTeacher_id() {
 		return teacher_id;
 	}
@@ -97,41 +125,20 @@ public class Teacher {
 	}
 
 	public int getIsAdmin() {
-		return isAdmin;
+		return is_admin;
 	}
 
 	public void setIsAdmin(int isAdmin) {
-		this.isAdmin = isAdmin;
+		this.is_admin = isAdmin;
 	}
 
-	public ArrayList<Course> getCourses_list() {
+	public ArrayList<Course> getCourses() {
 		return courses;
 	}
 
-	public void setCourses_list(ArrayList<Course> courses) {
+	public void setCourses(ArrayList<Course> courses) {
 		this.courses = courses;
 	}
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int teacher_id;
-	private String password;
-	private String email;
-	private String phone_number;
-	private String first_name;
-	private String last_name;
-	private Date dob;
-	private String gender;
-	private String address;
-	private String position;
-	private int isAdmin;
-	
-	@OneToMany(mappedBy = "teacher",targetEntity = Course.class,cascade = CascadeType.ALL)
-	@OnDelete(action = OnDeleteAction.CASCADE)
-	private ArrayList<Course> courses;
-
-	public Teacher() {
-		
-	}
 
 }
