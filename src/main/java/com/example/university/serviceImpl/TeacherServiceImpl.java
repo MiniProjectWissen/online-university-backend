@@ -1,6 +1,5 @@
 package com.example.university.serviceImpl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,25 +40,41 @@ public class TeacherServiceImpl implements ITeacherService {
 	
 	public TeacherDTO getTeacher(int teacherId) {
 		if(teacherDao.existsById(teacherId)) {
-//			return teacherDao.findTeacher(teacherId);
+			return teacherDao.findTeacher(teacherId);
 		}
 		return null;
 		
 		
 	}
 	
-//	public List<TeacherDTO> getAllTeachers(){
-//		return teacherDao.findAllTeacher();
-//	}
-//	
-	public TeacherDTO updateTeacher(int teacherId , TeacherDTO teacherDto) {
+	public List<TeacherDTO> getAllTeachers(){
+		return teacherDao.findAllTeacher();
+	}
+	
+	public Teacher updateTeacher(int teacherId , TeacherDTO teacherDto) {
+		if(teacherDao.existsById(teacherId)) {
+			Teacher teacher = teacherDao.findById(teacherId).get();
+			teacher.setFirst_name(teacherDto.getFirst_name());
+			teacher.setLast_name(teacherDto.getLast_name());
+			teacher.setAddress(teacherDto.getAddress());
+			teacher.setDob(teacherDto.getDob());
+			teacher.setEmail(teacherDto.getEmail());
+			teacher.setPassword(teacherDto.getPassword());
+			teacher.setGender(teacherDto.getGender());
+			teacher.setPhone_number(teacher.getPhone_number());
+			teacher.setPosition(teacherDto.getPosition());
+			teacher.setIsAdmin(0);
+			
+			teacher.setCourses(null);
+			return teacherDao.save(teacher);
+		}
 		return null;
 	}
 	
 	public void deleteTeacher(int teacherId) {
-		
+		if(teacherDao.existsById(teacherId)) {
+			teacherDao.deleteById(teacherId);
+		}
 	}
-
-	
 
 }

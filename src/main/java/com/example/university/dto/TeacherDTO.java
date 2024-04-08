@@ -26,6 +26,23 @@ public class TeacherDTO {
 	private @NonNull Date dob;
 	private @NonNull String position;
 	private @NonNull int is_admin;
+	public TeacherDTO() {}
+	public TeacherDTO(@NonNull int teacher_id, @NonNull String first_name, @NonNull String last_name,
+			@NonNull String email, @NonNull String password, @NonNull String address, @NonNull String phone_number,
+			@NonNull String gender, @NonNull Date dob, @NonNull String position, @NonNull int is_admin) {
+		super();
+		this.teacher_id = teacher_id;
+		this.first_name = first_name;
+		this.last_name = last_name;
+		this.email = email;
+		this.password = password;
+		this.address = address;
+		this.phone_number = phone_number;
+		this.gender = gender;
+		this.dob = dob;
+		this.position = position;
+		this.is_admin = is_admin;
+	}
 	public int getTeacher_id() {
 		return teacher_id;
 	}

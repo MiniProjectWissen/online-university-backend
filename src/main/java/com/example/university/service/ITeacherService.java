@@ -13,8 +13,8 @@ public interface ITeacherService {
 
 	public Teacher createTeacher(TeacherDTO teacherDto);
 	public TeacherDTO getTeacher(int teacherId);
-//	public List<TeacherDTO> getAllTeachers();
-	public TeacherDTO updateTeacher(int teacherId , TeacherDTO teacherDto);
+	public List<TeacherDTO> getAllTeachers();
+	public Teacher updateTeacher(int teacherId , TeacherDTO teacherDto);
 	public void deleteTeacher(int teacherId);
 	
 }
