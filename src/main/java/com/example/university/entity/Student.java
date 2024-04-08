@@ -11,24 +11,29 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Setter
+@Getter
+@Data
 public class Student {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int stud_id;
 	private String password;
-	private String email;
-	public ArrayList<Course> getCourses_list() {
-		return courses;
-	}
-
-	public void setCourses_list(ArrayList<Course> courses) {
-		this.courses = courses;
-	}
-
+	private String email;	
 	private String phone_number;
 	private String first_name;
 	private String last_name;
@@ -41,7 +46,9 @@ public class Student {
 	@ManyToMany(targetEntity = Course.class, cascade = { CascadeType.MERGE, CascadeType.PERSIST,
 			CascadeType.REFRESH })
 	@OnDelete(action = OnDeleteAction.CASCADE)
+	@JoinTable(name = "Student_Course_Mapping", joinColumns = @JoinColumn(name = "stud_id"), inverseJoinColumns = @JoinColumn(name = "course_id"))
 	private ArrayList<Course> courses;
+
 	public int getStud_id() {
 		return stud_id;
 	}
@@ -130,8 +137,13 @@ public class Student {
 		this.standard = standard;
 	}
 
-	public Student() {
-		
+	public ArrayList<Course> getCourses() {
+		return courses;
 	}
 
+	public void setCourses(ArrayList<Course> courses) {
+		this.courses = courses;
+	}
+	
+	
 }

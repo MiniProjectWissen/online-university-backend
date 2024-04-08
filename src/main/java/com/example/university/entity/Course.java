@@ -14,11 +14,23 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Setter
+@Getter
+@Data
 public class Course {
 
 	@Id
@@ -36,22 +48,15 @@ public class Course {
 	private Time end_time;
 	private int lectures_taken;
 	
-	@ManyToMany(mappedBy = "courses", targetEntity = Student.class, cascade = CascadeType.ALL)
+	@ManyToMany(targetEntity = Student.class, cascade = CascadeType.ALL)
 	@OnDelete(action = OnDeleteAction.CASCADE)
+	@JoinTable(name = "Student_Course_Mapping", joinColumns = @JoinColumn(name = "course_id"), inverseJoinColumns = @JoinColumn(name = "stud_id"))
 	private ArrayList<Student> students;
 	
 	@ManyToOne(targetEntity = Teacher.class,cascade = CascadeType.ALL)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn(name = "teacher_id")
 	private Teacher teacher;
-	
-	public Teacher getTeacher() {
-		return teacher;
-	}
-
-	public void setTeacher(Teacher teacher) {
-		this.teacher = teacher;
-	}
 
 	public int getCourse_id() {
 		return course_id;
@@ -60,8 +65,6 @@ public class Course {
 	public void setCourse_id(int course_id) {
 		this.course_id = course_id;
 	}
-
-	
 
 	public int getForum_id() {
 		return forum_id;
@@ -143,16 +146,20 @@ public class Course {
 		this.lectures_taken = lectures_taken;
 	}
 
-	public ArrayList<Student> getStudents_list() {
+	public ArrayList<Student> getStudents() {
 		return students;
 	}
 
-	public void setStudents_list(ArrayList<Student> students) {
+	public void setStudents(ArrayList<Student> students) {
 		this.students = students;
 	}
 
-	public Course() {
-		
+	public Teacher getTeacher() {
+		return teacher;
 	}
 
+	public void setTeacher(Teacher teacher) {
+		this.teacher = teacher;
+	}
+	
 }
