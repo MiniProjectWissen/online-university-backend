@@ -14,6 +14,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 
@@ -47,8 +48,9 @@ public class Course {
 	private Time end_time;
 	private int lectures_taken;
 	
-	@ManyToMany(mappedBy = "courses", targetEntity = Student.class, cascade = CascadeType.ALL)
+	@ManyToMany(targetEntity = Student.class, cascade = CascadeType.ALL)
 	@OnDelete(action = OnDeleteAction.CASCADE)
+	@JoinTable(name = "Student_Course_Mapping", joinColumns = @JoinColumn(name = "course_id"), inverseJoinColumns = @JoinColumn(name = "stud_id"))
 	private ArrayList<Student> students;
 	
 	@ManyToOne(targetEntity = Teacher.class,cascade = CascadeType.ALL)
