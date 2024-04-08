@@ -1,5 +1,7 @@
 package com.example.university.serviceImpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -68,9 +70,9 @@ public class CourseServiceImpl implements ICourseService{
 	
 	public CourseDTO findByCourseId(Integer courseId)
 	{
-//		if (courseDao.existsById(courseId)) {
-//			return courseDao.findByCourseId(courseId);
-//		}
+		if (courseDao.existsById(courseId)) {
+			return courseDao.findByCourseId(courseId);
+		}
 		return null;
 	}
 	
@@ -82,5 +84,10 @@ public class CourseServiceImpl implements ICourseService{
 			course.setLectures_taken(course.getLectures_taken()+1);
 			courseDao.save(course);
 		}
+	}
+	
+	public List<CourseDTO> getAllCourses()
+	{
+		return courseDao.findAllCourses();
 	}
 }
