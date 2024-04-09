@@ -2,7 +2,7 @@ package com.example.university.service;
 
 
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -18,7 +18,7 @@ public interface IStudentService {
 
 	public StudentDTO findByStudentId(Integer userId);
 	
-	public ArrayList<StudentDTO> getAllStudents();
+	public List<StudentDTO> getAllStudents();
 
 	public Student updateStudentByStudentId(Integer userId, StudentDTO studentDto);
 
