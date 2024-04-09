@@ -1,7 +1,10 @@
 package com.example.university.entity;
 
-import java.util.ArrayList;
-import java.util.Date;
+
+
+
+import java.sql.Date;
+import java.util.List;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -47,7 +50,8 @@ public class Student {
 			CascadeType.REFRESH })
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinTable(name = "Student_Course_Mapping", joinColumns = @JoinColumn(name = "stud_id"), inverseJoinColumns = @JoinColumn(name = "course_id"))
-	private ArrayList<Course> courses;
+
+	private List<Course> courses;
 
 	public int getStud_id() {
 		return stud_id;
@@ -137,11 +141,11 @@ public class Student {
 		this.standard = standard;
 	}
 
-	public ArrayList<Course> getCourses() {
+	public List<Course> getCourses() {
 		return courses;
 	}
 
-	public void setCourses(ArrayList<Course> courses) {
+	public void setCourses(List<Course> courses) {
 		this.courses = courses;
 	}
 	

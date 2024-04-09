@@ -22,4 +22,9 @@ public class OnlineUniversityValidationController {
 	public ResponseEntity<Object> handleException(InvalidCourseException exception) {
 		return new ResponseEntity<>(exception.getLocalizedMessage(), HttpStatus.BAD_REQUEST);
 	}
+	
+	@ExceptionHandler(value = InvalidDataValidationException.class)
+	public ResponseEntity<Object> handleException(InvalidDataValidationException exception) {
+		return new ResponseEntity<>(exception.getLocalizedMessage(), HttpStatus.BAD_REQUEST);
+	}
 }

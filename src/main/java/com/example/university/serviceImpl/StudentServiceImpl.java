@@ -1,6 +1,6 @@
 package com.example.university.serviceImpl;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,23 +22,22 @@ public class StudentServiceImpl implements IStudentService {
 
 	@Override
 	public Student addStudent(StudentDTO studentDto) {
-		
-		if(!studentDao.findByEmail(studentDto.getEmail())) {
-		
-		Student student = new Student();
-		student.setAddress(studentDto.getAddress());
-		student.setDob(studentDto.getDob());
-		student.setEmail(studentDto.getEmail());
-		student.setFirst_name(studentDto.getFirst_name());
-		student.setLast_name(studentDto.getLast_name());
-		student.setGender(studentDto.getGender());
-		student.setPassword(studentDto.getPassword());
-		student.setCourses(new ArrayList<Course>());
-		student.setPhone_number(null);
-		student.setRoll_no(studentDto.getRoll_no());
-		student.setStandard(studentDto.getStandard());
-		
-		return studentDao.save(student);
+
+		if(!studentDao.existsByEmail(studentDto.getEmail())) {
+			Student student = new Student();
+			student.setAddress(studentDto.getAddress());
+			student.setDob(studentDto.getDob());
+			student.setEmail(studentDto.getEmail());
+			student.setFirst_name(studentDto.getFirst_name());
+			student.setLast_name(studentDto.getLast_name());
+			student.setGender(studentDto.getGender());
+			student.setPassword(studentDto.getPassword());
+//			student.setCourses(new List<Course>());
+			student.setPhone_number(studentDto.getEmail());
+			student.setRoll_no(studentDto.getRoll_no());
+			student.setStandard(studentDto.getStandard());
+			
+			return studentDao.save(student);
 		}
 		return null;
 	}
@@ -68,7 +67,7 @@ public class StudentServiceImpl implements IStudentService {
 			student.setLast_name(studentDto.getLast_name());
 			student.setGender(studentDto.getGender());
 			student.setPassword(studentDto.getPassword());
-			student.setCourses(new ArrayList<Course>());
+//			student.setCourses(new List<Course>());
 			student.setPhone_number(null);
 			student.setRoll_no(studentDto.getRoll_no());
 			student.setStandard(studentDto.getStandard());
@@ -93,7 +92,7 @@ public class StudentServiceImpl implements IStudentService {
 	}
 
 	@Override
-	public ArrayList<StudentDTO> getAllStudents() {
+	public List<StudentDTO> getAllStudents() {
 		return studentDao.findAllStudents();
 	}
 

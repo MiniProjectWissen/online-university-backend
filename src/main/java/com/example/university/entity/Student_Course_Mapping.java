@@ -1,5 +1,6 @@
 package com.example.university.entity;
 
+import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
@@ -15,30 +16,27 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Student_Course_Mapping {
 	
-	@Id
-	private int stud_id;
-	@Id
-	private int course_id;
+	@EmbeddedId
+	private StudentCourseKey id;
+	
 	private int attendance_lecture_count;
-	public Student_Course_Mapping() {}
-	public Student_Course_Mapping(int stud_id, int course_id, int attendance_lecture_count) {
+	
+	public Student_Course_Mapping(StudentCourseKey id, int attendance_lecture_count) {
 		super();
-		this.stud_id = stud_id;
-		this.course_id = course_id;
+		this.id = id;
 		this.attendance_lecture_count = attendance_lecture_count;
 	}
-	public int getStud_id() {
-		return stud_id;
+
+	public StudentCourseKey getId() {
+		return id;
 	}
-	public void setStud_id(int stud_id) {
-		this.stud_id = stud_id;
+
+	public void setId(StudentCourseKey id) {
+		this.id = id;
 	}
-	public int getCourse_id() {
-		return course_id;
-	}
-	public void setCourse_id(int course_id) {
-		this.course_id = course_id;
-	}
+
+	public Student_Course_Mapping() {}
+	
 	public int getAttendance_lecture_count() {
 		return attendance_lecture_count;
 	}
