@@ -11,6 +11,8 @@ import com.example.university.dao.ICourseDao;
 import com.example.university.dao.ITeacherDao;
 import com.example.university.dto.CourseDTO;
 import com.example.university.entity.Course;
+import com.example.university.entity.Teacher;
+import com.example.university.exception.InvalidCourseException;
 import com.example.university.service.ICourseService;
 
 @Service
@@ -25,7 +27,7 @@ public class CourseServiceImpl implements ICourseService{
 	
 	@Override
 	public Course addCourse(CourseDTO courseDTO)
-	{
+	{	
 		Course course =new Course();
 		course.setForum_id(courseDTO.getForum_id());
 		course.setTitle(courseDTO.getTitle());
@@ -37,7 +39,8 @@ public class CourseServiceImpl implements ICourseService{
 		course.setJoin_time(courseDTO.getJoin_time());
 		course.setEnd_time(courseDTO.getEnd_time());
 		course.setLectures_taken(courseDTO.getLectures_taken());
-		//course.setTeacher(teacherDao.findById(courseDTO.getTeacher_id()));
+		Teacher t=teacherDao.findById(courseDTO.getTeacher_id()).get();
+		course.setTeacher(t);
 		return courseDao.save(course);	
 	}
 	
@@ -47,7 +50,8 @@ public class CourseServiceImpl implements ICourseService{
 		if (courseDao.existsById(userId))
 		{
 			Course course =courseDao.findById(userId).get();
-			//course.setTeacher(courseDTO.getTeacher_id());
+			Teacher t=teacherDao.findById(courseDTO.getTeacher_id()).get();
+			course.setTeacher(t);
 			course.setForum_id(courseDTO.getForum_id());
 			course.setTitle(courseDTO.getTitle());
 			course.setDescription(courseDTO.getDescription());
@@ -61,16 +65,16 @@ public class CourseServiceImpl implements ICourseService{
 			
 			return courseDao.save(course);	
 		}else {
-			//throw new Exception();
+			throw new InvalidCourseException();
 		}
-		return null;
 	}
 	
 	public void deleteCourseById(Integer courseId)
 	{
 		if (courseDao.existsById(courseId)) {
 			courseDao.deleteById(courseId);
-			//throw new InvalidStudentException();
+		}else {
+			throw new InvalidCourseException();
 		}
 	}
 	
@@ -79,9 +83,9 @@ public class CourseServiceImpl implements ICourseService{
 
 		if (courseDao.existsById(courseId)) {
 			return courseDao.findByCourseId(courseId);
+		}else {
+			throw new InvalidCourseException();
 		}
-
-		return null;
 	}
 	
 	public void incrementLectureCount(Integer courseId)
@@ -91,6 +95,8 @@ public class CourseServiceImpl implements ICourseService{
 			Course course =courseDao.findById(courseId).get();
 			course.setLectures_taken(course.getLectures_taken()+1);
 			courseDao.save(course);
+		}else {
+			throw new InvalidCourseException();
 		}
 	}
 

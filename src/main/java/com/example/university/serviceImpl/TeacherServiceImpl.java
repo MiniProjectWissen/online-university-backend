@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.example.university.dao.ITeacherDao;
 import com.example.university.dto.TeacherDTO;
 import com.example.university.entity.Teacher;
+import com.example.university.exception.InvalidStudentException;
+import com.example.university.exception.InvalidTeacherException;
 import com.example.university.service.ITeacherService;
 
 @Service
@@ -18,7 +20,7 @@ public class TeacherServiceImpl implements ITeacherService {
 	
 	
 	public Teacher createTeacher(TeacherDTO teacherDto) {
-		if(!teacherDao.existsById(teacherDto.getTeacher_id())) {
+		if(!teacherDao.findByEmail(teacherDto.getEmail())) {
 			Teacher teacher = new Teacher();
 			
 			teacher.setTeacher_id(teacherDto.getTeacher_id());
@@ -42,9 +44,9 @@ public class TeacherServiceImpl implements ITeacherService {
 		if(teacherDao.existsById(teacherId)) {
 			return teacherDao.findTeacher(teacherId);
 		}
-		return null;
-		
-		
+		else {
+			throw new InvalidTeacherException();
+		}	
 	}
 	
 	public List<TeacherDTO> getAllTeachers(){
@@ -68,12 +70,16 @@ public class TeacherServiceImpl implements ITeacherService {
 //			teacher.setCourses(null);
 			return teacherDao.save(teacher);
 		}
-		return null;
+		else {
+			throw new InvalidTeacherException();
+		}
 	}
 	
 	public void deleteTeacher(int teacherId) {
 		if(teacherDao.existsById(teacherId)) {
 			teacherDao.deleteById(teacherId);
+		}else {
+			throw new InvalidTeacherException();
 		}
 	}
 
