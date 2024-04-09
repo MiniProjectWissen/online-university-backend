@@ -9,6 +9,8 @@ import com.example.university.dao.IStudentDao;
 import com.example.university.dto.StudentDTO;
 import com.example.university.entity.Course;
 import com.example.university.entity.Student;
+import com.example.university.exception.InvalidCourseException;
+import com.example.university.exception.InvalidStudentException;
 import com.example.university.service.IStudentService;
 
 
@@ -20,6 +22,7 @@ public class StudentServiceImpl implements IStudentService {
 
 	@Override
 	public Student addStudent(StudentDTO studentDto) {
+
 		if(!studentDao.existsByEmail(studentDto.getEmail())) {
 			Student student = new Student();
 			student.setAddress(studentDto.getAddress());
@@ -38,6 +41,7 @@ public class StudentServiceImpl implements IStudentService {
 		}
 		return null;
 		
+
 	}
 
 	@Override
@@ -47,7 +51,7 @@ public class StudentServiceImpl implements IStudentService {
 			studentDao.deleteById(studId);
 		}
 		else {
-			
+			throw new InvalidStudentException();
 		}
 	}
 
@@ -74,8 +78,7 @@ public class StudentServiceImpl implements IStudentService {
 			
 		}
 		else {
-			//
-			return null;
+			throw new InvalidStudentException();
 		}
 		
 	}
@@ -86,9 +89,8 @@ public class StudentServiceImpl implements IStudentService {
 			return studentDao.findByStudentId(studId);
 		}
 		else {
-			//
+			throw new InvalidStudentException();
 		}
-		return null;
 	}
 
 	@Override

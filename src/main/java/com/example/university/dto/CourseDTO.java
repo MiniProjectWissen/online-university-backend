@@ -24,14 +24,14 @@ public class CourseDTO {
 	private  Date start_date;
 	private  Date end_date;
 	private  String sch_days;
-	private  Blob syllabus;
+	private  String syllabus;
 	private  Time join_time;
 	private  Time end_time;
 	private  int lectures_taken;
 	private  int teacher_id;
 	
 	public CourseDTO(int course_id, @NonNull int forum_id, @NonNull String title, @NonNull String description,
-			@NonNull Date start_date, @NonNull Date end_date, @NonNull String sch_days, @NonNull Blob syllabus,
+			@NonNull Date start_date, @NonNull Date end_date, @NonNull String sch_days, @NonNull String syllabus,
 			@NonNull Time join_time, @NonNull Time end_time, @NonNull int lectures_taken, @NonNull int teacher_id) {
 		super();
 		this.course_id = course_id;
@@ -89,10 +89,10 @@ public class CourseDTO {
 	public void setSch_days(String sch_days) {
 		this.sch_days = sch_days;
 	}
-	public Blob getSyllabus() {
+	public String getSyllabus() {
 		return syllabus;
 	}
-	public void setSyllabus(Blob syllabus) {
+	public void setSyllabus(String syllabus) {
 		this.syllabus = syllabus;
 	}
 	public Time getJoin_time() {
