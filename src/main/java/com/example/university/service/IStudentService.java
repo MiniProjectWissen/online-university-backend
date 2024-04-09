@@ -17,12 +17,12 @@ public interface IStudentService {
 	
 	public ArrayList<StudentDTO> getAllStudents();
 
-	public Student updateStudent(Integer userId, StudentDTO studentDto);
+	public Student updateStudentByStudentId(Integer userId, StudentDTO studentDto);
 
 	
 
 
 
-	void deleteStudent(Integer stud_id);
+	void deleteStudentByStudentId(Integer stud_id);
 
 }

@@ -30,14 +30,14 @@ public class StudentServiceImpl implements IStudentService {
 		student.setRoll_no(studentDto.getRoll_no());
 		student.setStandard(studentDto.getStandard());
 		
-		return null;
+		return studentDao.save(student);
 	}
 
 	@Override
-	public void deleteStudent(Integer stud_id) {
+	public void deleteStudentByStudentId(Integer studId) {
 		
-		if(studentDao.existsById(stud_id)) {
-			studentDao.deleteById(stud_id);
+		if(studentDao.existsById(studId)) {
+			studentDao.deleteById(studId);
 		}
 		else {
 			
@@ -47,21 +47,46 @@ public class StudentServiceImpl implements IStudentService {
 	
 
 	@Override
-	public Student updateStudent(Integer userId, StudentDTO studentDto) {
+	public Student updateStudentByStudentId(Integer studId, StudentDTO studentDto) {
+		if(studentDao.existsById(studId)) {
+			Student student= studentDao.findById(studId).get();
+			
+			student.setAddress(studentDto.getAddress());
+			student.setDob(studentDto.getDob());
+			student.setEmail(studentDto.getEmail());
+			student.setFirst_name(studentDto.getFirst_name());
+			student.setLast_name(studentDto.getLast_name());
+			student.setGender(studentDto.getGender());
+			student.setPassword(studentDto.getPassword());
+			student.setCourses(new ArrayList<Course>());
+			student.setPhone_number(null);
+			student.setRoll_no(studentDto.getRoll_no());
+			student.setStandard(studentDto.getStandard());
+			
+			return studentDao.save(student);
+			
+		}
+		else {
+			//
+			return null;
+		}
 		
-		return null;
 	}
 
 	@Override
-	public StudentDTO findByStudentId(Integer userId) {
-		// TODO Auto-generated method stub
+	public StudentDTO findByStudentId(Integer studId) {
+		if(studentDao.existsById(studId)) {
+			return studentDao.findByStudentId(studId);
+		}
+		else {
+			//
+		}
 		return null;
 	}
 
 	@Override
 	public ArrayList<StudentDTO> getAllStudents() {
-		// TODO Auto-generated method stub
-		return null;
+		return studentDao.findAllStudents();
 	}
 
 }

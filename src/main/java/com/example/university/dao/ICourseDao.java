@@ -1,14 +1,25 @@
 package com.example.university.dao;
 
+
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
 
 import com.example.university.dto.CourseDTO;
 import com.example.university.entity.Course;
 
+@Repository
 public interface ICourseDao extends JpaRepository<Course, Integer> {
-//
-//	@Query("select new com.example.university.dto.CourseDTO(s.forum_id, s.title, s.description, s.start_date,s.end_date,s.sch_days,s.syllabus,s.join_time,s.end_time,s.lectures_taken ,s.Teacher.teacher_id ) from Course s where s.course_id=:courseId")
-//	CourseDTO findByCourseId(@Param("courseId") Integer courseId);
+
+
+	@Query("SELECT new com.example.university.dto.CourseDTO(c.course_id,c.forum_id,c.title,c.description,c.start_date,c.end_date,c.sch_days,c.syllabus,c.join_time,c.end_time,c.lectures_taken,c.teacher.teacher_id) FROM Course c WHERE c.course_id = :courseId")
+	CourseDTO findByCourseId(@Param("courseId") Integer courseId);
+	
+	@Query(value="select new com.example.university.dto.CourseDTO(c.course_id,c.forum_id,c.title,c.description,c.start_date,c.end_date,c.sch_days,c.syllabus,c.join_time,c.end_time,c.lectures_taken,c.teacher.teacher_id) from Course c")
+	List<CourseDTO> findAllCourses();
+
 }

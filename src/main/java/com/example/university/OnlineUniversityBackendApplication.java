@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-//@EnableJpaRepositories ("domain.repositroy-package")
+//@EnableJpaRepositories ("com.example.university")
 public class OnlineUniversityBackendApplication {
 
 	public static void main(String[] args) {
