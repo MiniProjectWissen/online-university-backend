@@ -33,7 +33,7 @@ public class StudentServiceImpl implements IStudentService {
 			student.setGender(studentDto.getGender());
 			student.setPassword(studentDto.getPassword());
 //			student.setCourses(new List<Course>());
-			student.setPhone_number(studentDto.getEmail());
+			student.setPhone_number(studentDto.getPhone_number());
 			student.setRoll_no(studentDto.getRoll_no());
 			student.setStandard(studentDto.getStandard());
 			
@@ -68,7 +68,7 @@ public class StudentServiceImpl implements IStudentService {
 			student.setGender(studentDto.getGender());
 			student.setPassword(studentDto.getPassword());
 //			student.setCourses(new List<Course>());
-			student.setPhone_number(null);
+			student.setPhone_number(studentDto.getPhone_number());
 			student.setRoll_no(studentDto.getRoll_no());
 			student.setStandard(studentDto.getStandard());
 			
