@@ -27,6 +27,25 @@ public class StudentDTO {
 	private Date dob;
 	private String roll_no;
 	private int standard;
+	
+	public StudentDTO() {}
+	
+	public StudentDTO(int stud_id, String first_name, String last_name, String email, String password, String address,
+			String phone_number, String gender, Date dob, String roll_no, int standard) {
+		super();
+		this.stud_id = stud_id;
+		this.first_name = first_name;
+		this.last_name = last_name;
+		this.email = email;
+		this.password = password;
+		this.address = address;
+		this.phone_number = phone_number;
+		this.gender = gender;
+		this.dob = dob;
+		this.roll_no = roll_no;
+		this.standard = standard;
+	}
+
 	public int getStud_id() {
 		return stud_id;
 	}

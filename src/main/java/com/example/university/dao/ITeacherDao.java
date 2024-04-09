@@ -19,5 +19,7 @@ public interface ITeacherDao extends JpaRepository<Teacher, Integer> {
 		
 	@Query(value="select new com.example.university.dto.TeacherDTO(t.teacher_id,t.first_name,t.last_name,t.email,t.password,t.address,t.phone_number,t.gender,t.dob,t.position,t.is_admin) from Teacher t  ")
 	List<TeacherDTO> findAllTeacher();
+	
+	Boolean findByEmail(String email);
 
 }

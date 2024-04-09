@@ -48,6 +48,27 @@ public class Student {
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinTable(name = "Student_Course_Mapping", joinColumns = @JoinColumn(name = "stud_id"), inverseJoinColumns = @JoinColumn(name = "course_id"))
 	private ArrayList<Course> courses;
+	
+	public Student() {}
+
+	
+	public Student(int stud_id, String password, String email, String phone_number, String first_name, String last_name,
+			Date dob, String gender, String address, String roll_no, int standard, ArrayList<Course> courses) {
+		super();
+		this.stud_id = stud_id;
+		this.password = password;
+		this.email = email;
+		this.phone_number = phone_number;
+		this.first_name = first_name;
+		this.last_name = last_name;
+		this.dob = dob;
+		this.gender = gender;
+		this.address = address;
+		this.roll_no = roll_no;
+		this.standard = standard;
+		this.courses = courses;
+	}
+
 
 	public int getStud_id() {
 		return stud_id;

@@ -4,6 +4,7 @@ import java.sql.Blob;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -43,7 +44,7 @@ public class Course {
 	private Date start_date;
 	private Date end_date;
 	private String sch_days;
-	private Blob syllabus;
+	private String syllabus;
 	private Time join_time;
 	private Time end_time;
 	private int lectures_taken;
@@ -51,7 +52,7 @@ public class Course {
 	@ManyToMany(targetEntity = Student.class, cascade = CascadeType.ALL)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinTable(name = "Student_Course_Mapping", joinColumns = @JoinColumn(name = "course_id"), inverseJoinColumns = @JoinColumn(name = "stud_id"))
-	private ArrayList<Student> students;
+	private List<Student> students;
 	
 	@ManyToOne(targetEntity = Teacher.class,cascade = CascadeType.ALL)
 	@OnDelete(action = OnDeleteAction.CASCADE)
@@ -114,11 +115,11 @@ public class Course {
 		this.sch_days = sch_days;
 	}
 
-	public Blob getSyllabus() {
+	public String getSyllabus() {
 		return syllabus;
 	}
 
-	public void setSyllabus(Blob syllabus) {
+	public void setSyllabus(String syllabus) {
 		this.syllabus = syllabus;
 	}
 
@@ -146,11 +147,11 @@ public class Course {
 		this.lectures_taken = lectures_taken;
 	}
 
-	public ArrayList<Student> getStudents() {
+	public List<Student> getStudents() {
 		return students;
 	}
 
-	public void setStudents(ArrayList<Student> students) {
+	public void setStudents(List<Student> students) {
 		this.students = students;
 	}
 
