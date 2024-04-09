@@ -60,7 +60,7 @@ public class StudentController {
 			return new ResponseEntity<>("Student added Successfully", HttpStatus.OK);
 			
 		} catch (InvalidStudentException e) {
-			throw  new InvalidStudentException(e.getMessage());
+			throw  new InvalidStudentException(e.getMessage()+"added student ");
 		}
 		
 	}
