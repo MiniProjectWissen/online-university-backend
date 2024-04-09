@@ -121,7 +121,7 @@ public class StudentController {
 	}
 	
 	
-	@PostMapping("/getCourse")
+	@PostMapping("/enrollCourse")
 	public ResponseEntity<Object> addStudentCourseEntry(@RequestBody Student_Course_MappingDTO student_Course_MappingDTO){
 		courseService.addStudentCourse(student_Course_MappingDTO);
 		return new ResponseEntity<>("Courese Student entry has been successfully done",HttpStatus.OK);

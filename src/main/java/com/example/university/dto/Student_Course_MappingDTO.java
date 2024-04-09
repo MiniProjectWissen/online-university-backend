@@ -1,5 +1,7 @@
 package com.example.university.dto;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import com.example.university.entity.StudentCourseKey;
 
 import io.micrometer.common.lang.NonNull;
@@ -15,8 +17,10 @@ import lombok.NoArgsConstructor;
 public class Student_Course_MappingDTO {
 	@EmbeddedId
 	private StudentCourseKey id;
+
 	private @NonNull int attendance_lecture_count;
-	public Student_Course_MappingDTO() {}
+	public Student_Course_MappingDTO() {
+	}
 	
 	public Student_Course_MappingDTO(StudentCourseKey id, int attendance_lecture_count) {
 		super();

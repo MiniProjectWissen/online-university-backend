@@ -1,13 +1,16 @@
 package com.example.university.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.Value;
 
 @Entity
 @Getter
@@ -18,8 +21,13 @@ public class Student_Course_Mapping {
 	
 	@EmbeddedId
 	private StudentCourseKey id;
-	
+	@Column(nullable = true)
 	private int attendance_lecture_count;
+	
+	
+	public Student_Course_Mapping() {
+		
+	}
 	
 	public Student_Course_Mapping(StudentCourseKey id, int attendance_lecture_count) {
 		super();
@@ -35,7 +43,6 @@ public class Student_Course_Mapping {
 		this.id = id;
 	}
 
-	public Student_Course_Mapping() {}
 	
 	public int getAttendance_lecture_count() {
 		return attendance_lecture_count;
