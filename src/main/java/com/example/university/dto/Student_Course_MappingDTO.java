@@ -1,28 +1,24 @@
-package com.example.university.entity;
+package com.example.university.dto;
 
-import jakarta.persistence.Entity;
+import io.micrometer.common.lang.NonNull;
 import jakarta.persistence.Id;
-
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Entity
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Student_Course_Mapping {
+public class Student_Course_MappingDTO {
 	@Id
 	
-	private int stud_id;
+	private @NonNull int stud_id;
 	@Id
 	
-	private int course_id;
-	private int attendance_lecture_count;
-	public Student_Course_Mapping() {}
-	public Student_Course_Mapping(int stud_id, int course_id, int attendance_lecture_count) {
+	private @NonNull int course_id;
+	private @NonNull int attendance_lecture_count;
+	public Student_Course_MappingDTO() {}
+	public Student_Course_MappingDTO(int stud_id, int course_id, int attendance_lecture_count) {
 		super();
 		this.stud_id = stud_id;
 		this.course_id = course_id;
@@ -46,5 +42,6 @@ public class Student_Course_Mapping {
 	public void setAttendance_lecture_count(int attendance_lecture_count) {
 		this.attendance_lecture_count = attendance_lecture_count;
 	}
+	
 	
 }
