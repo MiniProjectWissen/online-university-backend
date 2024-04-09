@@ -1,9 +1,12 @@
 package com.example.university.serviceImpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.university.dao.ICourseDao;
+import com.example.university.dao.ITeacherDao;
 import com.example.university.dto.CourseDTO;
 import com.example.university.entity.Course;
 import com.example.university.service.ICourseService;
@@ -13,6 +16,9 @@ public class CourseServiceImpl implements ICourseService{
 
 	@Autowired
 	ICourseDao courseDao;
+	
+	@Autowired
+	ITeacherDao teacherDao;
 	
 	
 	@Override
@@ -29,7 +35,7 @@ public class CourseServiceImpl implements ICourseService{
 		course.setJoin_time(courseDTO.getJoin_time());
 		course.setEnd_time(courseDTO.getEnd_time());
 		course.setLectures_taken(courseDTO.getLectures_taken());
-		
+		//course.setTeacher(teacherDao.findById(courseDTO.getTeacher_id()));
 		return courseDao.save(course);	
 	}
 	
@@ -68,9 +74,9 @@ public class CourseServiceImpl implements ICourseService{
 	
 	public CourseDTO findByCourseId(Integer courseId)
 	{
-//		if (courseDao.existsById(courseId)) {
-//			return courseDao.findByCourseId(courseId);
-//		}
+		if (courseDao.existsById(courseId)) {
+			return courseDao.findByCourseId(courseId);
+		}
 		return null;
 	}
 	
@@ -82,5 +88,10 @@ public class CourseServiceImpl implements ICourseService{
 			course.setLectures_taken(course.getLectures_taken()+1);
 			courseDao.save(course);
 		}
+	}
+	
+	public List<CourseDTO> getAllCourses()
+	{
+		return courseDao.findAllCourses();
 	}
 }

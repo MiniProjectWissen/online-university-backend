@@ -1,5 +1,7 @@
 package com.example.university.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.example.university.dto.CourseDTO;
@@ -14,4 +16,5 @@ public interface ICourseService {
 	public void deleteCourseById(Integer courseId);
 	public CourseDTO findByCourseId(Integer courseId);
 	public void incrementLectureCount(Integer courseId);
+	public List<CourseDTO> getAllCourses();
 }

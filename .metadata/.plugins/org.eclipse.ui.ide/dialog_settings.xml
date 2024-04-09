@@ -6,8 +6,13 @@
 		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
 		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
 		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+<<<<<<< HEAD
 			<item value="C:\Users\rushi\OneDrive\Desktop\WissenMiniProject"/>
 			<item value="C:\Users\rushi\OneDrive\Desktop\WissenMiniProject\online-university-backend"/>
+=======
+			<item value="C:\Users\Lenovo\Desktop\WissenMiniProject"/>
+			<item value="C:\Users\Lenovo\Desktop\WissenMiniProject\online-university-backend"/>
+>>>>>>> harsh
 		</list>
 	</section>
 </section>
