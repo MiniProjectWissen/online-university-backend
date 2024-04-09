@@ -1,6 +1,7 @@
 package com.example.university.serviceImpl;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -8,9 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.university.dao.ICourseDao;
+import com.example.university.dao.IStudentDao;
 import com.example.university.dao.ITeacherDao;
+import com.example.university.dao.Student_Course_MappingDao;
 import com.example.university.dto.CourseDTO;
+import com.example.university.dto.Student_Course_MappingDTO;
 import com.example.university.entity.Course;
+import com.example.university.entity.Student;
+import com.example.university.entity.StudentCourseKey;
+import com.example.university.entity.Student_Course_Mapping;
 import com.example.university.service.ICourseService;
 
 @Service
@@ -22,7 +29,12 @@ public class CourseServiceImpl implements ICourseService{
 	@Autowired
 	ITeacherDao teacherDao;
 	
+	@Autowired
+	IStudentDao studentDao;
 	
+	@Autowired
+	Student_Course_MappingDao student_Course_MappingDao;
+
 	@Override
 	public Course addCourse(CourseDTO courseDTO)
 	{
@@ -98,6 +110,41 @@ public class CourseServiceImpl implements ICourseService{
 	public List<CourseDTO> getAllCourses()
 	{
 		return courseDao.findAllCourses();
+	}
+	
+	public Student_Course_Mapping addStudentCourse(Student_Course_MappingDTO student_Course_MappingDTO) {
+		Student s = studentDao.findById(student_Course_MappingDTO.getId().getStud_id()).get();
+		Course c = courseDao.findById(student_Course_MappingDTO.getId().getCourse_id()).get();
+		ArrayList<Course> my_course_list=s.getCourses();
+		my_course_list.add(c);
+		s.setCourses(my_course_list);
+		
+		Student_Course_Mapping scm = new Student_Course_Mapping();
+		scm.setId(student_Course_MappingDTO.getId());
+		scm.setAttendance_lecture_count(0);
+		return student_Course_MappingDao.save(scm);
+	}
+	
+	public void incrementStudentAttendenceCount(StudentCourseKey id) {
+		if(student_Course_MappingDao.existsById(id)) {
+			
+			Student_Course_Mapping scm = student_Course_MappingDao.findById(id).get();
+			scm.setAttendance_lecture_count(scm.getAttendance_lecture_count()+1);
+			student_Course_MappingDao.save(scm);
+		}
+	}
+	
+	public Double getCourseAttendence(StudentCourseKey id) {
+		if(student_Course_MappingDao.existsById(id)) {
+			
+			Student_Course_Mapping scm = student_Course_MappingDao.findById(id).get();
+			Course c = courseDao.findById(id.getCourse_id()).get();
+			int total_lectures = c.getLectures_taken();
+			int attended_lectures = scm.getAttendance_lecture_count();
+			Double attendence = (attended_lectures/total_lectures)*100d;
+			return attendence;
+		}
+		return 0.0;
 	}
 
 }

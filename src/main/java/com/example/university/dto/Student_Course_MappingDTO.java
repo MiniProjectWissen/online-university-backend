@@ -1,6 +1,9 @@
 package com.example.university.dto;
 
+import com.example.university.entity.StudentCourseKey;
+
 import io.micrometer.common.lang.NonNull;
+import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,32 +13,25 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Student_Course_MappingDTO {
-	@Id
-	
-	private @NonNull int stud_id;
-	@Id
-	
-	private @NonNull int course_id;
+	@EmbeddedId
+	private StudentCourseKey id;
 	private @NonNull int attendance_lecture_count;
 	public Student_Course_MappingDTO() {}
-	public Student_Course_MappingDTO(int stud_id, int course_id, int attendance_lecture_count) {
+	
+	public Student_Course_MappingDTO(StudentCourseKey id, int attendance_lecture_count) {
 		super();
-		this.stud_id = stud_id;
-		this.course_id = course_id;
+		this.id = id;
 		this.attendance_lecture_count = attendance_lecture_count;
 	}
-	public int getStud_id() {
-		return stud_id;
+
+	public StudentCourseKey getId() {
+		return id;
 	}
-	public void setStud_id(int stud_id) {
-		this.stud_id = stud_id;
+
+	public void setId(StudentCourseKey id) {
+		this.id = id;
 	}
-	public int getCourse_id() {
-		return course_id;
-	}
-	public void setCourse_id(int course_id) {
-		this.course_id = course_id;
-	}
+
 	public int getAttendance_lecture_count() {
 		return attendance_lecture_count;
 	}

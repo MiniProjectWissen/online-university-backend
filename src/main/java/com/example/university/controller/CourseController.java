@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.university.dto.CourseDTO;
+import com.example.university.dto.Student_Course_MappingDTO;
+import com.example.university.entity.StudentCourseKey;
 import com.example.university.service.ICourseService;
 
 @RestController
@@ -60,4 +62,11 @@ public class CourseController {
 		courseService.incrementLectureCount(course_id);
 		return new ResponseEntity<>("Course Lecture Count incremented Successfully", HttpStatus.OK);
 	}
+	
+	
+	
+	
+	
+	
+	
 }

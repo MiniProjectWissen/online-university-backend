@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.university.dto.TeacherDTO;
+import com.example.university.entity.StudentCourseKey;
+import com.example.university.service.ICourseService;
 import com.example.university.service.ITeacherService;
 
 @RestController
@@ -27,6 +29,9 @@ public class TeacherController {
 	@Autowired
 	ITeacherService teacherService;
 	
+	
+	@Autowired
+	private ICourseService courseService;
 	@PostMapping("/add")
 	public ResponseEntity<Object> newTeacher(@RequestBody TeacherDTO teacherDto,BindingResult bindingResult){
 		if(bindingResult.hasErrors()) {
@@ -108,5 +113,11 @@ public class TeacherController {
 			}
 		}
 		return null;
+	}
+	
+	@PutMapping("/incrementAttendence/{studentCourseId}")
+	public ResponseEntity<Object> incrementAttendence(@PathVariable StudentCourseKey studentCourseId){
+		courseService.incrementStudentAttendenceCount(studentCourseId);
+		return new ResponseEntity<>("Student attendence incremented",HttpStatus.OK);
 	}
 }

@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.example.university.dto.StudentDTO;
-
+import com.example.university.dto.Student_Course_MappingDTO;
+import com.example.university.entity.StudentCourseKey;
+import com.example.university.service.ICourseService;
 import com.example.university.service.IStudentService;
 
 @RestController
@@ -23,6 +25,9 @@ public class StudentController {
 
 	@Autowired
 	private IStudentService studentService;
+	
+	@Autowired
+	private ICourseService courseService;
 	
 	@GetMapping("/get/all")
 	public ResponseEntity<Object> listAllCourses() {
@@ -54,6 +59,19 @@ public class StudentController {
 	public ResponseEntity<Object> findByStudentId(@PathVariable Integer studId)
 	{
 		return new ResponseEntity<>(studentService.findByStudentId(studId), HttpStatus.OK);
+	}
+	
+	
+	@PostMapping("/getCourse")
+	public ResponseEntity<Object> addStudentCourseEntry(@RequestBody Student_Course_MappingDTO student_Course_MappingDTO){
+		courseService.addStudentCourse(student_Course_MappingDTO);
+		return new ResponseEntity<>("Courese Student entry has been successfully done",HttpStatus.OK);
+	}
+	
+	@GetMapping("/courseAttendence/{studentCourseId}")
+	public ResponseEntity<Object> getCourseAttendence(@PathVariable StudentCourseKey studentCourseId){
+		courseService.getCourseAttendence(studentCourseId);
+		return new ResponseEntity<>("Course Attendence found",HttpStatus.OK);
 	}
 	
 }
