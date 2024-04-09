@@ -47,7 +47,7 @@ public class StudentController {
 	}
 	
 	@PostMapping("/add")
-	public ResponseEntity<Object> addStudent( @RequestBody StudentDTO s, BindingResult bindingResult)
+	public ResponseEntity<Object> addStudent(@Valid @RequestBody StudentDTO s, BindingResult bindingResult)
 	{
 		if(bindingResult.hasErrors()) {
 			System.out.println("Some errors exist");

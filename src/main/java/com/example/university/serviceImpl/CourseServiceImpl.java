@@ -121,7 +121,7 @@ public class CourseServiceImpl implements ICourseService{
 	public Student_Course_Mapping addStudentCourse(Student_Course_MappingDTO student_Course_MappingDTO) {
 		Student s = studentDao.findById(student_Course_MappingDTO.getId().getStud_id()).get();
 		Course c = courseDao.findById(student_Course_MappingDTO.getId().getCourse_id()).get();
-		ArrayList<Course> my_course_list=s.getCourses();
+		List<Course> my_course_list=s.getCourses();
 		my_course_list.add(c);
 		s.setCourses(my_course_list);
 		
