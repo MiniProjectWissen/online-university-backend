@@ -50,6 +50,7 @@ public class Student {
 			CascadeType.REFRESH })
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinTable(name = "Student_Course_Mapping", joinColumns = @JoinColumn(name = "stud_id"), inverseJoinColumns = @JoinColumn(name = "course_id"))
+
 	private List<Course> courses;
 
 	public int getStud_id() {

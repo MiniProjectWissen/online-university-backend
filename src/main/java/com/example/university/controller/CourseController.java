@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.university.dto.CourseDTO;
+import com.example.university.dto.Student_Course_MappingDTO;
+import com.example.university.entity.StudentCourseKey;
 import com.example.university.exception.InvalidCourseException;
 import com.example.university.exception.InvalidDataValidationException;
 import com.example.university.exception.InvalidStudentException;
@@ -128,4 +130,11 @@ public class CourseController {
 		
 		
 	}
+	
+	
+	
+	
+	
+	
+	
 }

@@ -22,9 +22,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.example.university.dto.StudentDTO;
+import com.example.university.dto.Student_Course_MappingDTO;
+import com.example.university.entity.StudentCourseKey;
+import com.example.university.service.ICourseService;
 import com.example.university.exception.InvalidDataValidationException;
 import com.example.university.exception.InvalidStudentException;
-import com.example.university.exception.InvalidTeacherException;
 import com.example.university.service.IStudentService;
 
 import jakarta.validation.Valid;
@@ -36,13 +38,16 @@ public class StudentController {
 	@Autowired
 	private IStudentService studentService;
 	
+	@Autowired
+	private ICourseService courseService;
+	
 	@GetMapping("/get/all")
 	public ResponseEntity<Object> listAllCourses() {
 		return new ResponseEntity<>(studentService.getAllStudents(), HttpStatus.OK);
 	}
 	
 	@PostMapping("/add")
-	public ResponseEntity<Object> addCourse(@Valid @RequestBody StudentDTO s, BindingResult bindingResult)
+	public ResponseEntity<Object> addStudent(@Valid @RequestBody StudentDTO s, BindingResult bindingResult)
 	{
 		if(bindingResult.hasErrors()) {
 			System.out.println("Some errors exist");
@@ -60,13 +65,15 @@ public class StudentController {
 			return new ResponseEntity<>("Student added Successfully", HttpStatus.OK);
 			
 		} catch (InvalidStudentException e) {
-			throw  new InvalidStudentException(e.getMessage()+"added student ");
+
+			throw  new InvalidStudentException(e.getMessage()+"add student error ");
+
 		}
 		
 	}
 	
 	@PutMapping("/update/{studId}")
-	public ResponseEntity<Object> updateCourse(@PathVariable Integer studId,@Valid @RequestBody StudentDTO s,BindingResult bindingResult)
+	public ResponseEntity<Object> updateStudent(@PathVariable Integer studId,@Valid @RequestBody StudentDTO s,BindingResult bindingResult)
 	{
 		if(bindingResult.hasErrors()) {
 			System.out.println("Some errors exist");
@@ -90,7 +97,7 @@ public class StudentController {
 	}
 	
 	@DeleteMapping("/delete/{course_id}")
-	public ResponseEntity<Object> deleteCourse(@PathVariable Integer studId)
+	public ResponseEntity<Object> deleteStudent(@PathVariable Integer studId)
 	{
 		try {
 			studentService.deleteStudentByStudentId(studId);
@@ -111,6 +118,19 @@ public class StudentController {
 			throw  new InvalidStudentException(e.getMessage()+"Stud Id error");
 		}
 		
+	}
+	
+	
+	@PostMapping("/getCourse")
+	public ResponseEntity<Object> addStudentCourseEntry(@RequestBody Student_Course_MappingDTO student_Course_MappingDTO){
+		courseService.addStudentCourse(student_Course_MappingDTO);
+		return new ResponseEntity<>("Courese Student entry has been successfully done",HttpStatus.OK);
+	}
+	
+	@GetMapping("/courseAttendence/{studentCourseId}")
+	public ResponseEntity<Object> getCourseAttendence(@PathVariable StudentCourseKey studentCourseId){
+		courseService.getCourseAttendence(studentCourseId);
+		return new ResponseEntity<>("Course Attendence found",HttpStatus.OK);
 	}
 	
 }

@@ -27,6 +27,9 @@ public class StudentDTO {
 	private Date dob;
 	private String roll_no;
 	private int standard;
+	
+	public StudentDTO() {}
+
 	public int getStud_id() {
 		return stud_id;
 	}
