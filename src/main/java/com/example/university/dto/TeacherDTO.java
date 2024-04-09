@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
+
 import lombok.Setter;
 
 @Data
@@ -15,17 +15,17 @@ import lombok.Setter;
 
 
 public class TeacherDTO {
-	private @NonNull int teacher_id;
-	private @NonNull String first_name;
-	private @NonNull String last_name;
-	private @NonNull String email;
-	private @NonNull String password;
-	private @NonNull String address;
-	private @NonNull String phone_number;
-	private @NonNull String gender;
-	private @NonNull Date dob;
-	private @NonNull String position;
-	private @NonNull int is_admin;
+	private  int teacher_id;
+	private  String first_name;
+	private  String last_name;
+	private  String email;
+	private  String password;
+	private  String address;
+	private  String phone_number;
+	private  String gender;
+	private  Date dob;
+	private  String position;
+	private  int is_admin;
 	public int getTeacher_id() {
 		return teacher_id;
 	}

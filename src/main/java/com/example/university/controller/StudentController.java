@@ -22,7 +22,7 @@ import com.example.university.service.IStudentService;
 public class StudentController {
 
 	@Autowired
-	IStudentService studentService;
+	private IStudentService studentService;
 	
 	@GetMapping("/get/all")
 	public ResponseEntity<Object> listAllCourses() {

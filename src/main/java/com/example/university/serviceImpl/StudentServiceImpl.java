@@ -3,6 +3,7 @@ package com.example.university.serviceImpl;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.example.university.dao.IStudentDao;
 import com.example.university.dto.StudentDTO;
@@ -10,6 +11,8 @@ import com.example.university.entity.Course;
 import com.example.university.entity.Student;
 import com.example.university.service.IStudentService;
 
+
+@Service
 public class StudentServiceImpl implements IStudentService {
 	
 	@Autowired

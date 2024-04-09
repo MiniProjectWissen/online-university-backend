@@ -4,9 +4,12 @@ package com.example.university.service;
 
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Service;
+
 import com.example.university.dto.StudentDTO;
 import com.example.university.entity.Student;
 
+@Service
 public interface IStudentService {
 	
 	public Student addStudent(StudentDTO studentDto);
