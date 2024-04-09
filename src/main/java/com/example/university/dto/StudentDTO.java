@@ -17,14 +17,14 @@ import lombok.Setter;
 public class StudentDTO {
 
 	private int stud_id;
-	private String password;
-	private String email;	
-	private String phone_number;
 	private String first_name;
 	private String last_name;
-	private Date dob;
-	private String gender;
+	private String email;
+	private String password;
 	private String address;
+	private String phone_number;
+	private String gender;
+	private Date dob;
 	private String roll_no;
 	private int standard;
 	public int getStud_id() {

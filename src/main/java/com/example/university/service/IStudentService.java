@@ -4,9 +4,12 @@ package com.example.university.service;
 
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Service;
+
 import com.example.university.dto.StudentDTO;
 import com.example.university.entity.Student;
 
+@Service
 public interface IStudentService {
 	
 	public Student addStudent(StudentDTO studentDto);
@@ -17,12 +20,12 @@ public interface IStudentService {
 	
 	public ArrayList<StudentDTO> getAllStudents();
 
-	public Student updateStudent(Integer userId, StudentDTO studentDto);
+	public Student updateStudentByStudentId(Integer userId, StudentDTO studentDto);
 
 	
 
 
 
-	void deleteStudent(Integer stud_id);
+	void deleteStudentByStudentId(Integer stud_id);
 
 }

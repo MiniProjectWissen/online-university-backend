@@ -11,23 +11,24 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class CourseDTO {
 
     private int course_id;
-	private @NonNull int forum_id;
-	private @NonNull String title;
-	private @NonNull String description;
-	private @NonNull Date start_date;
-	private @NonNull Date end_date;
-	private @NonNull String sch_days;
-	private @NonNull Blob syllabus;
-	private @NonNull Time join_time;
-	private @NonNull Time end_time;
-	private @NonNull int lectures_taken;
-	private @NonNull int teacher_id;
+	private  int forum_id;
+	private  String title;
+	private  String description;
+	private  Date start_date;
+	private  Date end_date;
+	private  String sch_days;
+	private  Blob syllabus;
+	private  Time join_time;
+	private  Time end_time;
+	private  int lectures_taken;
+	private  int teacher_id;
 	
 	public CourseDTO(int course_id, @NonNull int forum_id, @NonNull String title, @NonNull String description,
 			@NonNull Date start_date, @NonNull Date end_date, @NonNull String sch_days, @NonNull Blob syllabus,

@@ -15,6 +15,7 @@ import lombok.Setter;
 
 
 public class TeacherDTO {
+
 	private @NonNull int teacher_id;
 	private @NonNull String first_name;
 	private @NonNull String last_name;
@@ -43,6 +44,7 @@ public class TeacherDTO {
 		this.position = position;
 		this.is_admin = is_admin;
 	}
+
 	public int getTeacher_id() {
 		return teacher_id;
 	}
