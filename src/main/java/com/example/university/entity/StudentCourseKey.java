@@ -1,6 +1,7 @@
 package com.example.university.entity;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import jakarta.persistence.Embeddable;
 import lombok.Data;
@@ -23,5 +24,18 @@ public class StudentCourseKey implements Serializable{
 	public void setCourse_id(int course_id) {
 		this.course_id = course_id;
 	}
+	@Override
+    public boolean equals(Object o) {
+		return false;
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        StudentCourseKey that = (StudentCourseKey) o;
+//        return stud_id == that.stud_id && course_id == that.course_id;
+    }
+
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(stud_id, course_id);
+//    }
 	
 }

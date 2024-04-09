@@ -22,7 +22,7 @@ public class TeacherServiceImpl implements ITeacherService {
 	
 	
 	public Teacher createTeacher(TeacherDTO teacherDto) {
-		if(!teacherDao.findByEmail(teacherDto.getEmail())) {
+		//if(!teacherDao.findByEmail(teacherDto.getEmail())) {
 			Teacher teacher = new Teacher();
 			
 			teacher.setTeacher_id(teacherDto.getTeacher_id());
@@ -38,8 +38,8 @@ public class TeacherServiceImpl implements ITeacherService {
 			teacher.setIsAdmin(0);
 		
 			return teacherDao.save(teacher);
-		}
-		return null;
+		//}
+		//return null;
 	}
 	
 	public TeacherDTO getTeacher(int teacherId) {

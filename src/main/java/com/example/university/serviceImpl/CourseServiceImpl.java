@@ -53,7 +53,7 @@ public class CourseServiceImpl implements ICourseService{
 		course.setLectures_taken(courseDTO.getLectures_taken());
 		Teacher t=teacherDao.findById(courseDTO.getTeacher_id()).get();
 		course.setTeacher(t);
-		return courseDao.save(course);	
+		return courseDao.save(course);
 	}
 	
 	@Override
@@ -119,6 +119,7 @@ public class CourseServiceImpl implements ICourseService{
 	}
 	
 	public Student_Course_Mapping addStudentCourse(Student_Course_MappingDTO student_Course_MappingDTO) {
+		
 		Student s = studentDao.findById(student_Course_MappingDTO.getId().getStud_id()).get();
 		Course c = courseDao.findById(student_Course_MappingDTO.getId().getCourse_id()).get();
 		List<Course> my_course_list=s.getCourses();

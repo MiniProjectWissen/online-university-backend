@@ -47,7 +47,7 @@ public class StudentController {
 	}
 	
 	@PostMapping("/add")
-	public ResponseEntity<Object> addStudent( @RequestBody StudentDTO s, BindingResult bindingResult)
+	public ResponseEntity<Object> addStudent(@Valid @RequestBody StudentDTO s, BindingResult bindingResult)
 	{
 		if(bindingResult.hasErrors()) {
 			System.out.println("Some errors exist");
@@ -65,7 +65,9 @@ public class StudentController {
 			return new ResponseEntity<>("Student added Successfully", HttpStatus.OK);
 			
 		} catch (InvalidStudentException e) {
+
 			throw  new InvalidStudentException(e.getMessage()+"add student error ");
+
 		}
 		
 	}
@@ -119,7 +121,7 @@ public class StudentController {
 	}
 	
 	
-	@PostMapping("/getCourse")
+	@PostMapping("/enrollCourse")
 	public ResponseEntity<Object> addStudentCourseEntry(@RequestBody Student_Course_MappingDTO student_Course_MappingDTO){
 		courseService.addStudentCourse(student_Course_MappingDTO);
 		return new ResponseEntity<>("Courese Student entry has been successfully done",HttpStatus.OK);
