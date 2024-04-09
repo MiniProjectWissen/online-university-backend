@@ -65,7 +65,7 @@ public class TeacherServiceImpl implements ITeacherService {
 			teacher.setPosition(teacherDto.getPosition());
 			teacher.setIsAdmin(0);
 			
-			teacher.setCourses(null);
+//			teacher.setCourses(null);
 			return teacherDao.save(teacher);
 		}
 		return null;

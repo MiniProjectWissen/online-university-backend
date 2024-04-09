@@ -2,6 +2,7 @@ package com.example.university.entity;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -43,7 +44,7 @@ public class Teacher {
 	
 	@OneToMany(mappedBy = "teacher",targetEntity = Course.class,cascade = CascadeType.ALL)
 	@OnDelete(action = OnDeleteAction.CASCADE)
-	private ArrayList<Course> courses;
+	private List<Course> courses;
 
 	public int getTeacher_id() {
 		return teacher_id;
@@ -133,11 +134,11 @@ public class Teacher {
 		this.is_admin = isAdmin;
 	}
 
-	public ArrayList<Course> getCourses() {
+	public List<Course> getCourses() {
 		return courses;
 	}
 
-	public void setCourses(ArrayList<Course> courses) {
+	public void setCourses(List<Course> courses) {
 		this.courses = courses;
 	}
 
