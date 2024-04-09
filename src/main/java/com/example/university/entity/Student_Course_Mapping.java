@@ -14,11 +14,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Student_Course_Mapping {
-	@Id
 	
+	@Id
 	private int stud_id;
-	@Id
-	
 	private int course_id;
 	private int attendance_lecture_count;
 	
