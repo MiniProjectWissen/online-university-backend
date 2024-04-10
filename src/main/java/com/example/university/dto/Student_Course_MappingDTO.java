@@ -14,18 +14,21 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class Student_Course_MappingDTO {
 	@EmbeddedId
 	private StudentCourseKey id;
 
-	private @NonNull int attendance_lecture_count;
+	private  int attendance_lecture_count;
 	public Student_Course_MappingDTO() {
+		this.attendance_lecture_count = 0;
+
 	}
 	
 	public Student_Course_MappingDTO(StudentCourseKey id, int attendance_lecture_count) {
 		super();
 		this.id = id;
-		this.attendance_lecture_count = attendance_lecture_count;
+		this.attendance_lecture_count = 0;
 	}
 
 	public StudentCourseKey getId() {

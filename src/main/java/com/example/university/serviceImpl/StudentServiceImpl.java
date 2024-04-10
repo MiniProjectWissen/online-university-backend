@@ -23,7 +23,7 @@ public class StudentServiceImpl implements IStudentService {
 	@Override
 	public Student addStudent(StudentDTO studentDto) {
 
-		if(!studentDao.existsByEmail(studentDto.getEmail())) {
+//		if(!studentDao.existsByEmail(studentDto.getEmail())) {
 			Student student = new Student();
 			student.setAddress(studentDto.getAddress());
 			student.setDob(studentDto.getDob());
@@ -38,8 +38,8 @@ public class StudentServiceImpl implements IStudentService {
 			student.setStandard(studentDto.getStandard());
 			
 			return studentDao.save(student);
-		}
-		return null;
+//		}
+//		return null;
 	}
 
 	@Override
