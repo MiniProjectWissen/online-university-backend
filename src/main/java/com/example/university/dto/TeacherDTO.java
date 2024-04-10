@@ -2,6 +2,9 @@ package com.example.university.dto;
 
 import java.sql.Date;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -16,21 +19,43 @@ import lombok.Setter;
 
 public class TeacherDTO {
 
-	private @NonNull int teacher_id;
-	private @NonNull String first_name;
-	private @NonNull String last_name;
-	private @NonNull String email;
-	private @NonNull String password;
-	private @NonNull String address;
-	private @NonNull String phone_number;
-	private @NonNull String gender;
-	private @NonNull Date dob;
-	private @NonNull String position;
-	private @NonNull int is_admin;
-	public TeacherDTO() {}
-	public TeacherDTO(@NonNull int teacher_id, @NonNull String first_name, @NonNull String last_name,
-			@NonNull String email, @NonNull String password, @NonNull String address, @NonNull String phone_number,
-			@NonNull String gender, @NonNull Date dob, @NonNull String position, @NonNull int is_admin) {
+	private int teacher_id;
+	@NotBlank(message = "First name is required")
+    @Pattern(regexp = "^[a-zA-Z]+$", message = "First name must contain only letters")
+	private String first_name;
+	@NotBlank(message = "Last name is required")
+    @Pattern(regexp = "^[a-zA-Z]+$", message = "Last name must contain only letters")
+	private  String last_name;
+	@Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "Invalid email address")
+	private  String email;
+	@Pattern(regexp = "^(?=.*[A-Z])(?=.*[!@#$%^&*()-+=])(?=.*[a-z]).{8,}$", message = "Password must be at least 8 characters long and contain one uppercase letter, one special character, and one lowercase letter")
+	private  String password;
+	@NotBlank(message = "Address is required")
+	private  String address;
+	@NotBlank(message = "Phone number is required")
+    @Pattern(regexp = "^\\d{10}$", message = "Invalid phone number format")
+	private  String phone_number;
+	@NotBlank(message = "Gender is required")
+	@Pattern(regexp = "^(Male|Female)$", message = "Gender must be Male or Female")
+	private  String gender;
+	private  Date dob;
+	private  String position;
+	@NotNull(message = "Is admin value cannot be null")
+    @Pattern(regexp = "^(0|1)$", message = "Is admin value must be either 0 or 1")
+	private  int is_admin;
+	
+	
+	
+	public TeacherDTO(int teacher_id,
+			@NotBlank(message = "First name is required") @Pattern(regexp = "^[a-zA-Z]+$", message = "First name must contain only letters") String first_name,
+			@NotBlank(message = "Last name is required") @Pattern(regexp = "^[a-zA-Z]+$", message = "Last name must contain only letters") String last_name,
+			@Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "Invalid email address") String email,
+			@Pattern(regexp = "^(?=.*[A-Z])(?=.*[!@#$%^&*()-+=])(?=.*[a-z]).{8,}$", message = "Password must be at least 8 characters long and contain one uppercase letter, one special character, and one lowercase letter") String password,
+			@NotBlank(message = "Address is required") String address,
+			@NotBlank(message = "Phone number is required") @Pattern(regexp = "^\\d{10}$", message = "Invalid phone number format") String phone_number,
+			@NotBlank(message = "Gender is required") @Pattern(regexp = "^(Male|Female)$", message = "Gender must be Male or Female") String gender,
+			Date dob, String position,
+			@NotNull(message = "Is admin value cannot be null") @Pattern(regexp = "^(0|1)$", message = "Is admin value must be either 0 or 1") int is_admin) {
 		super();
 		this.teacher_id = teacher_id;
 		this.first_name = first_name;
@@ -44,6 +69,10 @@ public class TeacherDTO {
 		this.position = position;
 		this.is_admin = is_admin;
 	}
+
+
+	public TeacherDTO() {}
+	
 
 	public int getTeacher_id() {
 		return teacher_id;

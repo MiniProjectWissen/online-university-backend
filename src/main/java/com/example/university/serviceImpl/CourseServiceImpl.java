@@ -39,21 +39,28 @@ public class CourseServiceImpl implements ICourseService{
 
 	@Override
 	public Course addCourse(CourseDTO courseDTO)
-	{	
-		Course course =new Course();
-		course.setForum_id(courseDTO.getForum_id());
-		course.setTitle(courseDTO.getTitle());
-		course.setDescription(courseDTO.getDescription());
-		course.setStart_date(courseDTO.getStart_date());
-		course.setEnd_date(courseDTO.getEnd_date());
-		course.setSch_days(courseDTO.getSch_days());
-		course.setSyllabus(courseDTO.getSyllabus());
-		course.setJoin_time(courseDTO.getJoin_time());
-		course.setEnd_time(courseDTO.getEnd_time());
-		course.setLectures_taken(courseDTO.getLectures_taken());
-		Teacher t=teacherDao.findById(courseDTO.getTeacher_id()).get();
-		course.setTeacher(t);
-		return courseDao.save(course);	
+	{
+		if(!courseDao.existByTitle(courseDTO.getTitle())) {
+			Course course =new Course();
+			course.setForum_id(courseDTO.getForum_id());
+			course.setTitle(courseDTO.getTitle());
+			course.setDescription(courseDTO.getDescription());
+			course.setStart_date(courseDTO.getStart_date());
+			course.setEnd_date(courseDTO.getEnd_date());
+			course.setSch_days(courseDTO.getSch_days());
+			course.setSyllabus(courseDTO.getSyllabus());
+			course.setJoin_time(courseDTO.getJoin_time());
+			course.setEnd_time(courseDTO.getEnd_time());
+			course.setLectures_taken(courseDTO.getLectures_taken());
+			Teacher t=teacherDao.findById(courseDTO.getTeacher_id()).get();
+			course.setTeacher(t);
+			return courseDao.save(course);	
+		}
+		else {
+			throw new InvalidCourseException("Existing course title");
+		}
+		
+
 	}
 	
 	@Override
@@ -77,7 +84,7 @@ public class CourseServiceImpl implements ICourseService{
 			
 			return courseDao.save(course);	
 		}else {
-			throw new InvalidCourseException();
+			throw new InvalidCourseException("No such record exists");
 		}
 	}
 	
@@ -86,7 +93,7 @@ public class CourseServiceImpl implements ICourseService{
 		if (courseDao.existsById(courseId)) {
 			courseDao.deleteById(courseId);
 		}else {
-			throw new InvalidCourseException();
+			throw new InvalidCourseException("No such record exists");
 		}
 	}
 	
@@ -96,7 +103,7 @@ public class CourseServiceImpl implements ICourseService{
 		if (courseDao.existsById(courseId)) {
 			return courseDao.findByCourseId(courseId);
 		}else {
-			throw new InvalidCourseException();
+			throw new InvalidCourseException("No such record exists");
 		}
 	}
 	
@@ -108,7 +115,7 @@ public class CourseServiceImpl implements ICourseService{
 			course.setLectures_taken(course.getLectures_taken()+1);
 			courseDao.save(course);
 		}else {
-			throw new InvalidCourseException();
+			throw new InvalidCourseException("No such record exists");
 		}
 	}
 
@@ -142,6 +149,9 @@ public class CourseServiceImpl implements ICourseService{
 			scm.setAttendance_lecture_count(scm.getAttendance_lecture_count()+1);
 			student_Course_MappingDao.save(scm);
 		}
+		else {
+			throw new InvalidCourseException("No such record exists");
+		}
 	}
 	
 	public Double getCourseAttendence(StudentCourseKey id) {
@@ -154,7 +164,10 @@ public class CourseServiceImpl implements ICourseService{
 			Double attendence = (attended_lectures/total_lectures)*100d;
 			return attendence;
 		}
-		return 0.0;
+		else {
+			throw new InvalidCourseException("No such record exists");
+		}
+		
 	}
 
 }

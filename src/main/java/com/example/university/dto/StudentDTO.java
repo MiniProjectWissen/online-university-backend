@@ -2,6 +2,7 @@ package com.example.university.dto;
 
 import java.sql.Date;
 
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -17,15 +18,29 @@ import lombok.Setter;
 public class StudentDTO {
 
 	private int stud_id;
+	@NotBlank(message = "First name is required")
+    @Pattern(regexp = "^[a-zA-Z]+$", message = "First name must contain only letters")
 	private String first_name;
+    @NotBlank(message = "Last name is required")
+    @Pattern(regexp = "^[a-zA-Z]+$", message = "Last name must contain only letters")
 	private String last_name;
+	@Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "Invalid email address")
 	private String email;
+	@Pattern(regexp = "^(?=.*[A-Z])(?=.*[!@#$%^&*()-+=])(?=.*[a-z]).{8,}$", message = "Password must be at least 8 characters long and contain one uppercase letter, one special character, and one lowercase letter")
 	private String password;
+	@NotBlank(message = "Address is required")
 	private String address;
+	@NotBlank(message = "Phone number is required")
+    @Pattern(regexp = "^\\d{10}$", message = "Invalid phone number format")
 	private String phone_number;
+	@NotBlank(message = "Gender is required")
+	@Pattern(regexp = "^(Male|Female)$", message = "Gender must be Male or Female")
 	private String gender;
 	private Date dob;
+	@Pattern(regexp = "^\\d{4}$", message = "Roll number must be 4 digits")
 	private String roll_no;
+    @Min(value = 1, message = "Standard must be at least 1")
+    @Max(value = 17, message = "Standard must be at most 17")
 	private int standard;
 	
 	public StudentDTO() {}
@@ -54,8 +69,17 @@ public class StudentDTO {
 	public void setPhone_number(String phone_number) {
 		this.phone_number = phone_number;
 	}
-	public StudentDTO(int stud_id, String first_name, String last_name, String email, String password, String address,
-			String phone_number, String gender, Date dob, String roll_no, int standard) {
+	
+	public StudentDTO(int stud_id,
+			@NotBlank(message = "First name is required") @Pattern(regexp = "^[a-zA-Z]+$", message = "First name must contain only letters") String first_name,
+			@NotBlank(message = "Last name is required") @Pattern(regexp = "^[a-zA-Z]+$", message = "Last name must contain only letters") String last_name,
+			@Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "Invalid email address") String email,
+			@Pattern(regexp = "^(?=.*[A-Z])(?=.*[!@#$%^&*()-+=])(?=.*[a-z]).{8,}$", message = "Password must be at least 8 characters long and contain one uppercase letter, one special character, and one lowercase letter") String password,
+			@NotBlank(message = "Address is required") String address,
+			@NotBlank(message = "Phone number is required") @Pattern(regexp = "^\\d{10}$", message = "Invalid phone number format") String phone_number,
+			@NotBlank(message = "Gender is required") @Pattern(regexp = "^(Male|Female)$", message = "Gender must be Male or Female") String gender,
+			Date dob, @Pattern(regexp = "^\\d{4}$", message = "Roll number must be 4 digits") String roll_no,
+			@Min(value = 1, message = "Standard must be at least 1") @Max(value = 17, message = "Standard must be at most 17") int standard) {
 		super();
 		this.stud_id = stud_id;
 		this.first_name = first_name;
@@ -69,6 +93,7 @@ public class StudentDTO {
 		this.roll_no = roll_no;
 		this.standard = standard;
 	}
+
 	public String getFirst_name() {
 		return first_name;
 	}

@@ -6,6 +6,11 @@ import java.util.Date;
 
 import com.example.university.entity.Teacher;
 
+import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,20 +24,35 @@ public class CourseDTO {
 
     private int course_id;
 	private  int forum_id;
+	@NotBlank(message = "Title cannot be blank")
+    @Size(max = 255, message = "Title must be at most 255 characters")
 	private  String title;
+	
+	@NotBlank(message = "Description cannot be blank")
 	private  String description;
-	private  Date start_date;
+	@NotNull(message = "Start date cannot be null")
+    @FutureOrPresent(message = "Start date must be in the past or present")
+    private  Date start_date;
+	@NotNull(message = "End date cannot be null")
+	@FutureOrPresent(message = "End date must be in the past or present")
 	private  Date end_date;
-	private  String sch_days;
+	@NotBlank(message = "Schedule days cannot be blank")
+    @Pattern(regexp = "^[01]{7}$", message = "Schedule days must be a 7-character string containing only '0' and '1' characters")
+    private  String sch_days;
 	private  String syllabus;
 	private  Time join_time;
 	private  Time end_time;
 	private  int lectures_taken;
 	private  int teacher_id;
 	
-	public CourseDTO(int course_id, @NonNull int forum_id, @NonNull String title, @NonNull String description,
-			@NonNull Date start_date, @NonNull Date end_date, @NonNull String sch_days, @NonNull String syllabus,
-			@NonNull Time join_time, @NonNull Time end_time, @NonNull int lectures_taken, @NonNull int teacher_id) {
+	
+	public CourseDTO(int course_id, int forum_id,
+			@NotBlank(message = "Title cannot be blank") @Size(max = 255, message = "Title must be at most 255 characters") String title,
+			@NotBlank(message = "Description cannot be blank") String description,
+			@NotNull(message = "Start date cannot be null") @FutureOrPresent(message = "Start date must be in the past or present") Date start_date,
+			@NotNull(message = "End date cannot be null") @FutureOrPresent(message = "End date must be in the past or present") Date end_date,
+			@NotBlank(message = "Schedule days cannot be blank") @Pattern(regexp = "^[01]{7}$", message = "Schedule days must be a 7-character string containing only '0' and '1' characters") String sch_days,
+			String syllabus, Time join_time, Time end_time, int lectures_taken, int teacher_id) {
 		super();
 		this.course_id = course_id;
 		this.forum_id = forum_id;

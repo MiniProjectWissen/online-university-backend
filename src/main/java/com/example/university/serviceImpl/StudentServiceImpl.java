@@ -24,6 +24,7 @@ public class StudentServiceImpl implements IStudentService {
 	public Student addStudent(StudentDTO studentDto) {
 
 		if(!studentDao.existsByEmail(studentDto.getEmail())) {
+			
 			Student student = new Student();
 			student.setAddress(studentDto.getAddress());
 			student.setDob(studentDto.getDob());
@@ -39,7 +40,9 @@ public class StudentServiceImpl implements IStudentService {
 			
 			return studentDao.save(student);
 		}
-		return null;
+		else {
+			throw new InvalidStudentException("Email Id already exists");
+		}
 	}
 
 	@Override
@@ -49,7 +52,7 @@ public class StudentServiceImpl implements IStudentService {
 			studentDao.deleteById(studId);
 		}
 		else {
-			throw new InvalidStudentException();
+			throw new InvalidStudentException("No such record exists");
 		}
 	}
 
@@ -76,7 +79,7 @@ public class StudentServiceImpl implements IStudentService {
 			
 		}
 		else {
-			throw new InvalidStudentException();
+			throw new InvalidStudentException("No such record exists");
 		}
 		
 	}
@@ -87,7 +90,7 @@ public class StudentServiceImpl implements IStudentService {
 			return studentDao.findByStudentId(studId);
 		}
 		else {
-			throw new InvalidStudentException();
+			throw new InvalidStudentException("No such record exists");
 		}
 	}
 
