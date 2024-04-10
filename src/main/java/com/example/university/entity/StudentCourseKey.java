@@ -16,6 +16,12 @@ import lombok.NoArgsConstructor;
 public class StudentCourseKey implements Serializable{
 	private int stud_id;
 	private int course_id;
+	public StudentCourseKey() {}
+	public StudentCourseKey(int stud_id, int course_id) {
+		super();
+		this.stud_id = stud_id;
+		this.course_id = course_id;
+	}
 	public int getStud_id() {
 		return stud_id;
 	}

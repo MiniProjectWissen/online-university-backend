@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
 import com.example.university.dao.ICourseDao;
@@ -141,27 +142,33 @@ public class CourseServiceImpl implements ICourseService{
 		return null;
 	}
 	
-	public void incrementStudentAttendenceCount(StudentCourseKey id) {
-		if(student_Course_MappingDao.existsById(id)) {
-			
-			Student_Course_Mapping scm = student_Course_MappingDao.findById(id).get();
-//			scm.getAttendance_lecture_count()
+	@Modifying
+	@Transactional
+	public void incrementStudentAttendenceCount(int stud_id,int course_id) {
+//		if(student_Course_MappingDao.existsById({})) {
+			StudentCourseKey sck = new StudentCourseKey(stud_id,course_id);
+			Student_Course_Mapping scm = student_Course_MappingDao.findById(sck).get();
 			scm.setAttendance_lecture_count(scm.getAttendance_lecture_count()+1);
 			student_Course_MappingDao.save(scm);
-		}
+//		}
 	}
 	
-	public Double getCourseAttendence(StudentCourseKey id) {
-		if(student_Course_MappingDao.existsById(id)) {
+	@Transactional
+	public double getCourseAttendence(int stud_id,int course_id) {
+//		if(student_Course_MappingDao.existsById(id)) {
 			
-			Student_Course_Mapping scm = student_Course_MappingDao.findById(id).get();
-			Course c = courseDao.findById(id.getCourse_id()).get();
+			StudentCourseKey sck = new StudentCourseKey(stud_id,course_id);
+
+			Student_Course_Mapping scm = student_Course_MappingDao.findById(sck).get();
+			Course c = courseDao.findById(sck.getCourse_id()).get();
 			int total_lectures = c.getLectures_taken();
 			int attended_lectures = scm.getAttendance_lecture_count();
-			Double attendence = (attended_lectures/total_lectures)*100d;
-			return attendence;
-		}
-		return 0.0;
+			double att = (double) ((double)attended_lectures/total_lectures)*100d;
+			double roundedValue = (double) Math.round(att * 100) / 100;
+
+			return roundedValue;
+//		}
+//		return 0.0;
 	}
 
 

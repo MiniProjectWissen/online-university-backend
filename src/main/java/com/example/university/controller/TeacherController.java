@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.university.dto.TeacherDTO;
-import com.example.university.entity.StudentCourseKey;
 import com.example.university.service.ICourseService;
 import com.example.university.exception.InvalidDataValidationException;
 import com.example.university.exception.InvalidTeacherException;
@@ -128,9 +126,9 @@ public class TeacherController {
 		
 	}
 	
-	@PutMapping("/incrementAttendence")
-	public ResponseEntity<Object> incrementAttendence(@RequestBody StudentCourseKey studentCourseId){
-		courseService.incrementStudentAttendenceCount(studentCourseId);
+	@PutMapping("/incrementAttendence/{stud_id}/{course_id}")
+	public ResponseEntity<Object> incrementAttendence(@PathVariable int stud_id,@PathVariable int course_id){
+		courseService.incrementStudentAttendenceCount(stud_id,course_id);
 		return new ResponseEntity<>("Student attendence incremented",HttpStatus.OK);
 	}
 }

@@ -20,8 +20,9 @@ public class Student_Course_Mapping {
 	@EmbeddedId
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private StudentCourseKey id;
-	@Column(nullable = true)
+//	@Column(nullable = false)
 //	@Value("${attendance_lecture_count:0}")
+	 @Column(name = "attendance_lecture_count", columnDefinition = "int default 0")
 	private int attendance_lecture_count;
 	
 

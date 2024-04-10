@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -132,16 +131,17 @@ public class StudentController {
 		return new ResponseEntity<>("Courese Student entry has been successfully done",HttpStatus.OK);
 	}
 	
+
 	@PostMapping("/addTest")
 	public ResponseEntity<Object> addStudentTestEntry(@RequestBody Student_Test_MappingDTO student_Test_MappingDTO){
 		testService.addStudentTest(student_Test_MappingDTO);
 		return new ResponseEntity<>("Test Student entry has been successfully done",HttpStatus.OK);
 	}
 	
-	@GetMapping("/courseAttendence/{studentCourseId}")
-	public ResponseEntity<Object> getCourseAttendence(@PathVariable StudentCourseKey studentCourseId){
-		courseService.getCourseAttendence(studentCourseId);
-		return new ResponseEntity<>("Course Attendence found",HttpStatus.OK);
+	@GetMapping("/courseAttendence/{stud_id}/{course_id}")
+	public ResponseEntity<Object> getCourseAttendence(@PathVariable int stud_id,@PathVariable int course_id){
+		return new ResponseEntity<>(courseService.getCourseAttendence(stud_id,course_id)
+,HttpStatus.OK);
 	}
 	
 }
