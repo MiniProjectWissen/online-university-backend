@@ -120,8 +120,8 @@ public class CourseServiceImpl implements ICourseService{
 	
 	public Student_Course_Mapping addStudentCourse(Student_Course_MappingDTO student_Course_MappingDTO) {
 		
-		Student s = studentDao.findById(student_Course_MappingDTO.getId().getStud_id()).get();
-		Course c = courseDao.findById(student_Course_MappingDTO.getId().getCourse_id()).get();
+		Student s = studentDao.findById(student_Course_MappingDTO.getStud_id()).get();
+		Course c = courseDao.findById(student_Course_MappingDTO.getCourse_id()).get();
 		List<Course> my_course_list=s.getCourses();
 		my_course_list.add(c);
 		s.setCourses(my_course_list);
@@ -131,31 +131,32 @@ public class CourseServiceImpl implements ICourseService{
 		c.setStudents(course_student_list);
 		
 		Student_Course_Mapping scm = new Student_Course_Mapping();
-		scm.setId(student_Course_MappingDTO.getId());
+		scm.setStud_id(student_Course_MappingDTO.getStud_id());
+		scm.setCourse_id(student_Course_MappingDTO.getCourse_id());
 		scm.setAttendance_lecture_count(0);
 		return student_Course_MappingDao.save(scm);
 	}
 	
-	public void incrementStudentAttendenceCount(StudentCourseKey id) {
-		if(student_Course_MappingDao.existsById(id)) {
-			
-			Student_Course_Mapping scm = student_Course_MappingDao.findById(id).get();
-			scm.setAttendance_lecture_count(scm.getAttendance_lecture_count()+1);
-			student_Course_MappingDao.save(scm);
-		}
-	}
-	
-	public Double getCourseAttendence(StudentCourseKey id) {
-		if(student_Course_MappingDao.existsById(id)) {
-			
-			Student_Course_Mapping scm = student_Course_MappingDao.findById(id).get();
-			Course c = courseDao.findById(id.getCourse_id()).get();
-			int total_lectures = c.getLectures_taken();
-			int attended_lectures = scm.getAttendance_lecture_count();
-			Double attendence = (attended_lectures/total_lectures)*100d;
-			return attendence;
-		}
-		return 0.0;
-	}
+//	public void incrementStudentAttendenceCount(StudentCourseKey id) {
+//		if(student_Course_MappingDao.existsById(id)) {
+//			
+//			Student_Course_Mapping scm = student_Course_MappingDao.findById(id).get();
+//			scm.setAttendance_lecture_count(scm.getAttendance_lecture_count()+1);
+//			student_Course_MappingDao.save(scm);
+//		}
+//	}
+//	
+//	public Double getCourseAttendence(StudentCourseKey id) {
+//		if(student_Course_MappingDao.existsById(id)) {
+//			
+//			Student_Course_Mapping scm = student_Course_MappingDao.findById(id).get();
+//			Course c = courseDao.findById(id.getCourse_id()).get();
+//			int total_lectures = c.getLectures_taken();
+//			int attended_lectures = scm.getAttendance_lecture_count();
+//			Double attendence = (attended_lectures/total_lectures)*100d;
+//			return attendence;
+//		}
+//		return 0.0;
+//	}
 
 }

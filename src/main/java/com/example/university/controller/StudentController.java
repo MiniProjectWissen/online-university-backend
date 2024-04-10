@@ -127,11 +127,11 @@ public class StudentController {
 		return new ResponseEntity<>("Courese Student entry has been successfully done",HttpStatus.OK);
 	}
 	
-	@GetMapping("/courseAttendence/{studentCourseId}")
-	public ResponseEntity<Object> getCourseAttendence(@PathVariable StudentCourseKey studentCourseId){
-		courseService.getCourseAttendence(studentCourseId);
-		return new ResponseEntity<>("Course Attendence found",HttpStatus.OK);
-	}
+//	@GetMapping("/courseAttendence/{studentCourseId}")
+//	public ResponseEntity<Object> getCourseAttendence(@PathVariable StudentCourseKey studentCourseId){
+//		courseService.getCourseAttendence(studentCourseId);
+//		return new ResponseEntity<>("Course Attendence found",HttpStatus.OK);
+//	}
 	
 }
 

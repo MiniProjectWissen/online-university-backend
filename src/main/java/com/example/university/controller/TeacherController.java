@@ -127,10 +127,10 @@ public class TeacherController {
 		}
 		
 	}
-	
-	@PutMapping("/incrementAttendence/{studentCourseId}")
-	public ResponseEntity<Object> incrementAttendence(@PathVariable StudentCourseKey studentCourseId){
-		courseService.incrementStudentAttendenceCount(studentCourseId);
-		return new ResponseEntity<>("Student attendence incremented",HttpStatus.OK);
-	}
+//	
+//	@PutMapping("/incrementAttendence/{studentCourseId}")
+//	public ResponseEntity<Object> incrementAttendence(@PathVariable StudentCourseKey studentCourseId){
+//		courseService.incrementStudentAttendenceCount(studentCourseId);
+//		return new ResponseEntity<>("Student attendence incremented",HttpStatus.OK);
+//	}
 }
