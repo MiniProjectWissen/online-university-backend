@@ -23,11 +23,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.university.dto.StudentDTO;
 import com.example.university.dto.Student_Course_MappingDTO;
+import com.example.university.dto.Student_Test_MappingDTO;
 import com.example.university.entity.StudentCourseKey;
 import com.example.university.service.ICourseService;
 import com.example.university.exception.InvalidDataValidationException;
 import com.example.university.exception.InvalidStudentException;
 import com.example.university.service.IStudentService;
+import com.example.university.service.ITestService;
 
 import jakarta.validation.Valid;
 
@@ -40,6 +42,9 @@ public class StudentController {
 	
 	@Autowired
 	private ICourseService courseService;
+	
+	@Autowired
+	private ITestService testService;
 	
 	@GetMapping("/get/all")
 	public ResponseEntity<Object> listAllCourses() {
@@ -127,11 +132,17 @@ public class StudentController {
 		return new ResponseEntity<>("Courese Student entry has been successfully done",HttpStatus.OK);
 	}
 	
-//	@GetMapping("/courseAttendence/{studentCourseId}")
-//	public ResponseEntity<Object> getCourseAttendence(@PathVariable StudentCourseKey studentCourseId){
-//		courseService.getCourseAttendence(studentCourseId);
-//		return new ResponseEntity<>("Course Attendence found",HttpStatus.OK);
-//	}
+	@PostMapping("/addTest")
+	public ResponseEntity<Object> addStudentTestEntry(@RequestBody Student_Test_MappingDTO student_Test_MappingDTO){
+		testService.addStudentTest(student_Test_MappingDTO);
+		return new ResponseEntity<>("Test Student entry has been successfully done",HttpStatus.OK);
+	}
+	
+	@GetMapping("/courseAttendence/{studentCourseId}")
+	public ResponseEntity<Object> getCourseAttendence(@PathVariable StudentCourseKey studentCourseId){
+		courseService.getCourseAttendence(studentCourseId);
+		return new ResponseEntity<>("Course Attendence found",HttpStatus.OK);
+	}
 	
 }
 

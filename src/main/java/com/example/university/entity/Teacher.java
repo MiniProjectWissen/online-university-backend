@@ -24,7 +24,6 @@ import lombok.Setter;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class Teacher {
 	
 	

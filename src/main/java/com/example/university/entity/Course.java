@@ -1,10 +1,10 @@
 package com.example.university.entity;
 
-import java.sql.Blob;
 import java.sql.Time;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -18,8 +18,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-
-
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -52,12 +51,17 @@ public class Course {
 	@ManyToMany(targetEntity = Student.class, cascade = CascadeType.ALL)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinTable(name = "Student_Course_Mapping", joinColumns = @JoinColumn(name = "course_id"), inverseJoinColumns = @JoinColumn(name = "stud_id"))
-	private List<Student> students;
+	private Set<Student> students = new HashSet<>();
+	
 	
 	@ManyToOne(targetEntity = Teacher.class,cascade = CascadeType.ALL)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn(name = "teacher_id")
 	private Teacher teacher;
+	
+	@OneToMany(mappedBy = "course",targetEntity = Test.class,cascade = CascadeType.ALL)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	private Set<Test> tests;
 
 	public int getCourse_id() {
 		return course_id;
@@ -147,12 +151,20 @@ public class Course {
 		this.lectures_taken = lectures_taken;
 	}
 
-	public List<Student> getStudents() {
+	public Set<Student> getStudents() {
 		return students;
 	}
 
-	public void setStudents(List<Student> students) {
+	public void setStudents(Set<Student> students) {
 		this.students = students;
+	}
+	
+	public Set<Test> getTests() {
+		return tests;
+	}
+
+	public void setTests(Set<Test> tests) {
+		this.tests=tests;
 	}
 
 	public Teacher getTeacher() {

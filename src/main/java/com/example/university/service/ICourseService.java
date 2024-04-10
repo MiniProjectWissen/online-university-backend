@@ -24,8 +24,8 @@ public interface ICourseService {
 	public List<CourseDTO> getAllCourses();
 	
 	public Student_Course_Mapping addStudentCourse(Student_Course_MappingDTO student_Course_MappingDTO);
-	//public void incrementStudentAttendenceCount(StudentCourseKey id);
-	//public Double getCourseAttendence(StudentCourseKey id);
+	public void incrementStudentAttendenceCount(StudentCourseKey id);
+	public Double getCourseAttendence(StudentCourseKey id);
 	
 
 }
