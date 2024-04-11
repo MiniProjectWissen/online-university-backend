@@ -1,6 +1,7 @@
 package com.example.university.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,19 +18,16 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.example.university.dto.CourseDTO;
-import com.example.university.dto.Student_Course_MappingDTO;
-import com.example.university.entity.StudentCourseKey;
 import com.example.university.exception.InvalidCourseException;
 import com.example.university.exception.InvalidDataValidationException;
-import com.example.university.exception.InvalidStudentException;
 import com.example.university.service.ICourseService;
 
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/course")
+@CrossOrigin("http://localhost:4200")
 public class CourseController {
 
 	@Autowired
@@ -42,7 +41,6 @@ public class CourseController {
 		} catch (InvalidCourseException e) {
 			throw new InvalidCourseException(e.getMessage());
 		}
-		
 	}
 	
 	@PostMapping("/add")
@@ -61,7 +59,7 @@ public class CourseController {
 		
 		try {
 			courseService.addCourse(c);
-			return new ResponseEntity<>("Course added Successfully", HttpStatus.OK);
+			return new ResponseEntity<>(Collections.singletonMap("msg","Course added successfully"), HttpStatus.OK);
 			
 		} catch (InvalidCourseException e) {
 			throw new InvalidCourseException(e.getMessage());
@@ -85,7 +83,7 @@ public class CourseController {
 		
 		try {
 			courseService.updateCourse(user_id, c);
-			return new ResponseEntity<>("Course updated Successfully", HttpStatus.OK);
+			return new ResponseEntity<>(Collections.singletonMap("msg","Course updated successfully"), HttpStatus.OK);
 		}
 		 catch (InvalidCourseException e) {
 			throw new InvalidCourseException(e.getMessage()+" Course Id error");
@@ -98,7 +96,7 @@ public class CourseController {
 	{
 		try {
 			courseService.deleteCourseById(course_id);
-			return new ResponseEntity<>("Course deleted Successfully", HttpStatus.OK);
+			return new ResponseEntity<>(Collections.singletonMap("msg","Course deleted successfully"), HttpStatus.OK);
 		}
 		catch (InvalidCourseException e) {
 			throw new InvalidCourseException(e.getMessage()+" Course Id error");
@@ -122,7 +120,7 @@ public class CourseController {
 	{
 		try {
 			courseService.incrementLectureCount(course_id);
-			return new ResponseEntity<>("Course Lecture Count incremented Successfully", HttpStatus.OK);
+			return new ResponseEntity<>(Collections.singletonMap("msg","Course lecture count incremented successfully"), HttpStatus.OK);
 		}
 		catch (InvalidCourseException e) {
 			throw new InvalidCourseException(e.getMessage()+" Course Id error");
@@ -130,11 +128,5 @@ public class CourseController {
 		
 		
 	}
-	
-	
-	
-	
-	
-	
 	
 }

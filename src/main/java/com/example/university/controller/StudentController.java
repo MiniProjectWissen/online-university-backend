@@ -1,6 +1,7 @@
 package com.example.university.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -10,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,6 +36,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/student")
+@CrossOrigin("http://localhost:4200")
 public class StudentController {
 
 	@Autowired
@@ -66,7 +69,7 @@ public class StudentController {
 		
 		try {
 			studentService.addStudent(s);
-			return new ResponseEntity<>("Student added Successfully", HttpStatus.OK);
+			return new ResponseEntity<>(Collections.singletonMap("msg","Student added successfully"), HttpStatus.OK);
 			
 		} catch (InvalidStudentException e) {
 
@@ -92,7 +95,7 @@ public class StudentController {
 		
 		try {
 			studentService.updateStudentByStudentId(studId,s);
-			return new ResponseEntity<>("Student updated Successfully", HttpStatus.OK);
+			return new ResponseEntity<>(Collections.singletonMap("msg","Student updated successfully"), HttpStatus.OK);
 			
 		} catch (InvalidStudentException e) {
 			throw  new InvalidStudentException(e.getMessage()+"Stud Id error");
@@ -105,7 +108,7 @@ public class StudentController {
 	{
 		try {
 			studentService.deleteStudentByStudentId(studId);
-			return new ResponseEntity<>("Student deleted Successfully", HttpStatus.OK);
+			return new ResponseEntity<>(Collections.singletonMap("msg","Student deleted successfully"), HttpStatus.OK);
 		}catch (InvalidStudentException e) {
 			throw  new InvalidStudentException(e.getMessage()+"Stud Id error");
 		}
@@ -128,14 +131,14 @@ public class StudentController {
 	@PostMapping("/enrollCourse")
 	public ResponseEntity<Object> addStudentCourseEntry(@RequestBody Student_Course_MappingDTO student_Course_MappingDTO){
 		courseService.addStudentCourse(student_Course_MappingDTO);
-		return new ResponseEntity<>("Courese Student entry has been successfully done",HttpStatus.OK);
+		return new ResponseEntity<>(Collections.singletonMap("msg","Course student entry has been successfully done"), HttpStatus.OK);
 	}
 	
 
 	@PostMapping("/addTest")
 	public ResponseEntity<Object> addStudentTestEntry(@RequestBody Student_Test_MappingDTO student_Test_MappingDTO){
 		testService.addStudentTest(student_Test_MappingDTO);
-		return new ResponseEntity<>("Test Student entry has been successfully done",HttpStatus.OK);
+		return new ResponseEntity<>(Collections.singletonMap("msg","Test student entry added successfully"), HttpStatus.OK);
 	}
 	
 	@GetMapping("/courseAttendence/{stud_id}/{course_id}")

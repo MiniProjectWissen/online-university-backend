@@ -22,5 +22,9 @@ public interface IStudentDao extends JpaRepository<Student, Integer>{
 
 
 	boolean existsByEmail(String email);
-
+	
+	@Query("SELECT new com.example.university.dto.StudentDTO(s.stud_id,s.first_name,s.last_name,s.email,s.password,s.address,s.phone_number,s.gender,s.dob,s.roll_no,s.standard) FROM Student s WHERE s.email = :email")
+	StudentDTO findByEmail(@Param("email") String email);
+	
+	
 }

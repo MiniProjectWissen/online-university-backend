@@ -1,6 +1,7 @@
 package com.example.university.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -10,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,6 +31,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/teacher")
+@CrossOrigin("http://localhost:4200")
 public class TeacherController {
 	@Autowired
 	ITeacherService teacherService;
@@ -52,7 +55,7 @@ public class TeacherController {
 		
 		try {
 			teacherService.createTeacher(teacherDto);
-			return new ResponseEntity<>("teacher created successfully",HttpStatus.OK);
+			return new ResponseEntity<>(Collections.singletonMap("msg","Teacher added successfully"), HttpStatus.OK);
 		}
 		catch(InvalidTeacherException e) {
 			throw  new InvalidTeacherException(e.getMessage());
@@ -103,7 +106,7 @@ public class TeacherController {
 		} 
 		try {
 			teacherService.updateTeacher(Integer.parseInt(teacherId), teacherDTO);
-			return new ResponseEntity<>("Updated Faculty Details Successfully!", HttpStatus.OK);
+			return new ResponseEntity<>(Collections.singletonMap("msg","Teacher updated successfully"), HttpStatus.OK);
 		} catch (InvalidTeacherException e) {
 			throw  new InvalidTeacherException(e.getMessage());
 		}
@@ -118,7 +121,7 @@ public class TeacherController {
 		} else {
 			try {
 				teacherService.deleteTeacher(Integer.parseInt(teacherId));
-				return new ResponseEntity<>("Deleted Teacher from Records Successfully!", HttpStatus.OK);
+				return new ResponseEntity<>(Collections.singletonMap("msg","Teacher deleted successfully"), HttpStatus.OK);
 			} catch (InvalidTeacherException e) {
 				throw  new InvalidTeacherException(e.getMessage());
 			}
@@ -129,6 +132,6 @@ public class TeacherController {
 	@PutMapping("/incrementAttendence/{stud_id}/{course_id}")
 	public ResponseEntity<Object> incrementAttendence(@PathVariable int stud_id,@PathVariable int course_id){
 		courseService.incrementStudentAttendenceCount(stud_id,course_id);
-		return new ResponseEntity<>("Student attendence incremented",HttpStatus.OK);
+		return new ResponseEntity<>(Collections.singletonMap("msg","Student attendance incremented successfully"), HttpStatus.OK);
 	}
 }

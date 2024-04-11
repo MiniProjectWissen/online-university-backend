@@ -1,6 +1,7 @@
 package com.example.university.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +28,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/test")
+@CrossOrigin("http://localhost:4200")
 public class TestController {
 
 	@Autowired
@@ -57,7 +60,7 @@ public class TestController {
 		
 		try {
 			testService.createTest(c);
-			return new ResponseEntity<>("Test added Successfully", HttpStatus.OK);
+			return new ResponseEntity<>(Collections.singletonMap("msg","Test added successfully"), HttpStatus.OK);
 			
 		} catch (InvalidTestException e) {
 			throw new InvalidTestException(e.getMessage());
@@ -81,7 +84,7 @@ public class TestController {
 		
 		try {
 			testService.updateTest(user_id, c);
-			return new ResponseEntity<>("Test updated Successfully", HttpStatus.OK);
+			return new ResponseEntity<>(Collections.singletonMap("msg","Test updated successfully"), HttpStatus.OK);
 		}
 		 catch (InvalidTestException e) {
 			throw new InvalidTestException(e.getMessage()+" Course Id error");
@@ -94,7 +97,7 @@ public class TestController {
 	{
 		try {
 			testService.deleteTest(test_id);
-			return new ResponseEntity<>("Test deleted Successfully", HttpStatus.OK);
+			return new ResponseEntity<>(Collections.singletonMap("msg","Test deleted successfully"), HttpStatus.OK);
 		}
 		catch (InvalidTestException e) {
 			throw new InvalidTestException(e.getMessage()+" Course Id error");

@@ -15,7 +15,7 @@ public class InvalidDataValidationException extends RuntimeException {
 		this.messages = messages;
 	}
 
-	public List<String> getMessages() {
+	public List<String> getMsg() {
 		return messages;
 	}
 
