@@ -1,6 +1,7 @@
 package com.example.university.serviceImpl;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -103,6 +104,18 @@ public class StudentServiceImpl implements IStudentService {
 	@Override
 	public List<StudentDTO> getAllStudents() {
 		return studentDao.findAllStudents();
+	}
+
+	@Override
+	public Set<Course> getEnrolledCourses(Integer studId) {
+		
+		if(studentDao.existsById(studId)) {
+			Student student= studentDao.findById(studId).get();
+			return student.getCourses();
+		}
+		else {
+			throw new InvalidStudentException();
+		}
 	}
 
 }
