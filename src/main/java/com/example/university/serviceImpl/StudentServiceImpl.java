@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.university.dao.IStudentDao;
+import com.example.university.dto.CourseDTO;
 import com.example.university.dto.StudentDTO;
 import com.example.university.entity.Course;
 import com.example.university.entity.Student;
@@ -110,7 +111,7 @@ public class StudentServiceImpl implements IStudentService {
 	}
 
 	@Override
-	public Set<Course> getEnrolledCourses(Integer studId) {
+	public Set<CourseDTO> getEnrolledCourses(Integer studId) {
 		
 		if(studentDao.existsById(studId)) {
 			Student student= studentDao.findById(studId).get();
