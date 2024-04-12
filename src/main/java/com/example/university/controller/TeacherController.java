@@ -77,6 +77,20 @@ public class TeacherController {
 		
 	}
 	
+	@GetMapping("/get/email/{email}")
+	public ResponseEntity<Object> findTeacherByEmail(@PathVariable String email){
+		if(email.isBlank()||email.isEmpty()) {
+			throw new InvalidTeacherException("Teacher Id is blank");
+		}else {
+			try {
+				return new ResponseEntity<>(teacherService.getTeacherByEmail(email), HttpStatus.OK);
+			} catch(InvalidTeacherException e) {
+				throw  new InvalidTeacherException(e.getMessage());
+			}
+		}
+		
+	}
+	
 	@GetMapping("/get/all")
 	public ResponseEntity<Object> getTeacherList() {
 		try {

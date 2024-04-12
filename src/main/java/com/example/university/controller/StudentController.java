@@ -54,6 +54,10 @@ public class StudentController {
 		return new ResponseEntity<>(studentService.getAllStudents(), HttpStatus.OK);
 	}
 	
+	@GetMapping("/get/enrollCourses/{stud_id}")
+	public ResponseEntity<Object> listAllCourses(@PathVariable int stud_id) {
+		return new ResponseEntity<>(studentService.getAllEnrolledCourses(stud_id), HttpStatus.OK);
+	}
 	@PostMapping("/add")
 	public ResponseEntity<Object> addStudent(@Valid @RequestBody StudentDTO s, BindingResult bindingResult)
 	{
@@ -161,11 +165,7 @@ public class StudentController {
 ,HttpStatus.OK);
 	}
 	
-	@GetMapping("/getEnrolledCourses/{stud_id}")
-	public ResponseEntity<Object> getStudentEnrolledCourses(@PathVariable Integer stud_id)
-	{
-		return new ResponseEntity<>(studentService.getEnrolledCourses(stud_id),HttpStatus.OK);
-	}
+	
 	
 }
 

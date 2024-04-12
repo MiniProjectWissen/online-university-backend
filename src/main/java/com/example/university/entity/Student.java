@@ -11,8 +11,6 @@ import java.util.Set;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import com.example.university.dto.CourseDTO;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -55,7 +53,7 @@ public class Student {
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	//@JoinTable(name = "Student_Course_Mapping", joinColumns = @JoinColumn(name = "stud_id"), inverseJoinColumns = @JoinColumn(name = "course_id"))
 
-    private Set<CourseDTO> courses = new HashSet<>();
+    private Set<Course> courses = new HashSet<>();
 	
 	@ManyToMany(targetEntity = Test.class, cascade = { CascadeType.MERGE, CascadeType.PERSIST,
 			CascadeType.REFRESH })
@@ -153,11 +151,11 @@ public class Student {
 		this.standard = standard;
 	}
 
-	public Set<CourseDTO> getCourses() {
+	public Set<Course> getCourses() {
 		return courses;
 	}
 
-	public void setCourses(Set<CourseDTO> courses) {
+	public void setCourses(Set<Course> courses) {
 		this.courses = courses;
 	}
 	
