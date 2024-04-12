@@ -92,6 +92,15 @@ public class StudentServiceImpl implements IStudentService {
 	}
 
 	@Override
+	public StudentDTO findByStudentEmail(String email) {
+		if(studentDao.existsByEmail(email)) {
+			return studentDao.findByEmail(email);
+		}
+		else {
+			throw new InvalidStudentException();
+		}
+	}
+	@Override
 	public List<StudentDTO> getAllStudents() {
 		return studentDao.findAllStudents();
 	}

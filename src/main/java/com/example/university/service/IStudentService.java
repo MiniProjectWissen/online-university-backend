@@ -17,6 +17,8 @@ public interface IStudentService {
 	
 
 	public StudentDTO findByStudentId(Integer userId);
+	public StudentDTO findByStudentEmail(String email);
+
 	
 	public List<StudentDTO> getAllStudents();
 

@@ -127,7 +127,17 @@ public class StudentController {
 		
 	}
 	
-	
+	@GetMapping("/getEmail/{email}")
+	public ResponseEntity<Object> findByStudentEmail(@PathVariable String email)
+	{
+		try {
+			return new ResponseEntity<>(studentService.findByStudentEmail(email), HttpStatus.OK);
+			
+		} catch (InvalidStudentException e) {
+			throw  new InvalidStudentException(e.getMessage()+"Stud Id error");
+		}
+		
+	}
 	@PostMapping("/enrollCourse")
 	public ResponseEntity<Object> addStudentCourseEntry(@RequestBody Student_Course_MappingDTO student_Course_MappingDTO){
 		courseService.addStudentCourse(student_Course_MappingDTO);
