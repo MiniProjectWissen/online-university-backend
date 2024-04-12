@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,7 +36,8 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/student")
-@CrossOrigin("http://localhost:4200")
+
+@CrossOrigin(origins = "http://localhost:4200")
 public class StudentController {
 
 	@Autowired
@@ -48,7 +50,7 @@ public class StudentController {
 	private ITestService testService;
 	
 	@GetMapping("/get/all")
-	public ResponseEntity<Object> listAllCourses() {
+	public ResponseEntity<Object> listAllStudents() {
 		return new ResponseEntity<>(studentService.getAllStudents(), HttpStatus.OK);
 	}
 	
@@ -63,12 +65,15 @@ public class StudentController {
 			for(FieldError fe : fieldErrors) {
 				errMessage.add(fe.getDefaultMessage());
 			}
+//			System.out.println(errMessage);
 			throw new InvalidDataValidationException(errMessage);
 		}
 		
 		try {
 			studentService.addStudent(s);
+
 			return new ResponseEntity<>(Collections.singletonMap("msg","Student added successfully"), HttpStatus.OK);
+
 			
 		} catch (InvalidStudentException e) {
 
@@ -102,7 +107,7 @@ public class StudentController {
 		
 	}
 	
-	@DeleteMapping("/delete/{course_id}")
+	@DeleteMapping("/delete/{studId}")
 	public ResponseEntity<Object> deleteStudent(@PathVariable Integer studId)
 	{
 		try {

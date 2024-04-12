@@ -25,7 +25,7 @@ public class StudentServiceImpl implements IStudentService {
 	@Override
 	public Student addStudent(StudentDTO studentDto) {
 
-//		if(!studentDao.existsByEmail(studentDto.getEmail())) {
+		if(!studentDao.existsByEmail(studentDto.getEmail())) {
 			Student student = new Student();
 			student.setAddress(studentDto.getAddress());
 			student.setDob(studentDto.getDob());
@@ -40,7 +40,10 @@ public class StudentServiceImpl implements IStudentService {
 			student.setStandard(studentDto.getStandard());
 			
 			return studentDao.save(student);
-//		}
+		}
+		else {
+			throw new InvalidStudentException("duplicate email");
+		}
 //		return null;
 	}
 
