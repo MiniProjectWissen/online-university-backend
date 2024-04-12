@@ -30,6 +30,11 @@ public class CourseDTO {
 	private  int lectures_taken;
 	private  int teacher_id;
 	
+	public CourseDTO()
+	{
+		
+	}
+	
 	public CourseDTO(int course_id, @NonNull int forum_id, @NonNull String title, @NonNull String description,
 			@NonNull Date start_date, @NonNull Date end_date, @NonNull String sch_days, @NonNull String syllabus,
 			@NonNull Time join_time, @NonNull Time end_time, @NonNull int lectures_taken, @NonNull int teacher_id) {

@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.university.dto.StudentDTO;
 import com.example.university.dto.Student_Course_MappingDTO;
 import com.example.university.dto.Student_Test_MappingDTO;
-import com.example.university.entity.StudentCourseKey;
 import com.example.university.service.ICourseService;
 import com.example.university.exception.InvalidDataValidationException;
 import com.example.university.exception.InvalidStudentException;
