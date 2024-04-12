@@ -147,5 +147,11 @@ public class StudentController {
 ,HttpStatus.OK);
 	}
 	
+	@GetMapping("/getEnrolledCourses/{stud_id}")
+	public ResponseEntity<Object> getStudentEnrolledCourses(@PathVariable Integer stud_id)
+	{
+		return new ResponseEntity<>(studentService.getEnrolledCourses(stud_id),HttpStatus.OK);
+	}
+	
 }
 
