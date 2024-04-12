@@ -9,8 +9,6 @@ import java.util.Set;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import com.example.university.dto.StudentDTO;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -53,7 +51,7 @@ public class Course {
 	@ManyToMany(targetEntity = Student.class, cascade = CascadeType.ALL)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinTable(name = "Student_Course_Mapping", joinColumns = @JoinColumn(name = "course_id"), inverseJoinColumns = @JoinColumn(name = "stud_id"))
-	private Set<StudentDTO> students = new HashSet<>();
+	private Set<Student> students = new HashSet<>();
 	
 	
 	@ManyToOne(targetEntity = Teacher.class,cascade = CascadeType.ALL)
@@ -153,11 +151,11 @@ public class Course {
 		this.lectures_taken = lectures_taken;
 	}
 
-	public Set<StudentDTO> getStudents() {
+	public Set<Student> getStudents() {
 		return students;
 	}
 
-	public void setStudents(Set<StudentDTO> students) {
+	public void setStudents(Set<Student> students) {
 		this.students = students;
 	}
 	

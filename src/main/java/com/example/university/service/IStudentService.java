@@ -21,11 +21,12 @@ public interface IStudentService {
 	public StudentDTO findByStudentEmail(String email);
 
 	
-	public List<StudentDTO> getAllStudents();
+	public List<StudentDTO> getAllStudents(); 
+	public List<CourseDTO> getAllEnrolledCourses(Integer stud_id);
 
 	public Student updateStudentByStudentId(Integer userId, StudentDTO studentDto);
 
+
 	void deleteStudentByStudentId(Integer stud_id);
 
-	public Set<CourseDTO> getEnrolledCourses(Integer stud_id);
 }

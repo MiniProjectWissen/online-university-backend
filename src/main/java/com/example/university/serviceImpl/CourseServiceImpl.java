@@ -15,7 +15,6 @@ import com.example.university.dto.CourseDTO;
 import com.example.university.dto.StudentDTO;
 import com.example.university.dto.Student_Course_MappingDTO;
 import com.example.university.entity.Course;
-import com.example.university.entity.CourseMapper;
 import com.example.university.entity.Student;
 import com.example.university.entity.StudentCourseKey;
 import com.example.university.entity.Student_Course_Mapping;
@@ -37,8 +36,7 @@ public class CourseServiceImpl implements ICourseService{
 	@Autowired
 	IStudentDao studentDao;
 	
-	@Autowired
-    private CourseMapper courseMapper;
+	
 	
 	@Autowired
 	Student_Course_MappingDao student_Course_MappingDao;
@@ -126,26 +124,11 @@ public class CourseServiceImpl implements ICourseService{
 	
 	@Transactional
 	public Student_Course_Mapping addStudentCourse(Student_Course_MappingDTO student_Course_MappingDTO) {
-		
-		Student s = studentDao.findById(student_Course_MappingDTO.getId().getStud_id()).get();
-		Course c = courseDao.findById(student_Course_MappingDTO.getId().getCourse_id()).get();
-		CourseDTO cdto=courseMapper.toDto(c);
-		//StudentDTO sdto=studentDao.findByStudentId(student_Course_MappingDTO.getId().getStud_id());
-		
-		System.out.println("Start");
-		Set<CourseDTO> my_course_list=s.getCourses();
-		
-		System.out.println("Before adding "+my_course_list);
-		my_course_list.add(cdto);
-		System.out.println(cdto.getCourse_id()+" "+cdto.getLectures_taken());
-		
-		System.out.println("After adding "+my_course_list);
-		//s.setCourses(my_course_list);
 //		
-//		Set<StudentDTO> course_student_list=c.getStudents();
-//		course_student_list.add(sdto);
-//		c.setStudents(course_student_list);
-		
+//		Student s = studentDao.findById(student_Course_MappingDTO.getId().getStud_id()).get();
+//		Course c = courseDao.findById(student_Course_MappingDTO.getId().getCourse_id()).get();
+
+
 		if(!student_Course_MappingDao.existsById(student_Course_MappingDTO.getId())) {
 			
 			Student_Course_Mapping scm = new Student_Course_Mapping();
