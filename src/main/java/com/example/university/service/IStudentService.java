@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.university.dto.CourseDTO;
 import com.example.university.dto.StudentDTO;
 import com.example.university.entity.Student;
 
@@ -20,12 +21,10 @@ public interface IStudentService {
 	public StudentDTO findByStudentEmail(String email);
 
 	
-	public List<StudentDTO> getAllStudents();
+	public List<StudentDTO> getAllStudents(); 
+	public List<CourseDTO> getAllEnrolledCourses(Integer stud_id);
 
 	public Student updateStudentByStudentId(Integer userId, StudentDTO studentDto);
-
-	
-
 
 
 	void deleteStudentByStudentId(Integer stud_id);

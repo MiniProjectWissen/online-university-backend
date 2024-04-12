@@ -49,10 +49,14 @@ public class StudentController {
 	private ITestService testService;
 	
 	@GetMapping("/get/all")
-	public ResponseEntity<Object> listAllCourses() {
+	public ResponseEntity<Object> listAllStudents() {
 		return new ResponseEntity<>(studentService.getAllStudents(), HttpStatus.OK);
 	}
 	
+	@GetMapping("/get/enrollCourses/{stud_id}")
+	public ResponseEntity<Object> listAllCourses(@PathVariable int stud_id) {
+		return new ResponseEntity<>(studentService.getAllEnrolledCourses(stud_id), HttpStatus.OK);
+	}
 	@PostMapping("/add")
 	public ResponseEntity<Object> addStudent(@Valid @RequestBody StudentDTO s, BindingResult bindingResult)
 	{
