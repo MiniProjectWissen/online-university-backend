@@ -115,6 +115,18 @@ public class CourseController {
 		
 	}
 	
+	@GetMapping("/getCoursesByTeacher/{teacher_id}")
+	public ResponseEntity<Object> findCoursesByTeacher(@PathVariable Integer teacher_id)
+	{
+		try {
+			return new ResponseEntity<>(courseService.getAllCoursesByTeacher(teacher_id), HttpStatus.OK);
+		}
+		catch (InvalidCourseException e) {
+			throw new InvalidCourseException(e.getMessage()+" Course Id error");
+		}
+		
+	}
+	
 	@PutMapping("/incrementLectureCount/{course_id}")
 	public ResponseEntity<Object> incrementLectureCount(@PathVariable Integer course_id)
 	{

@@ -122,6 +122,11 @@ public class CourseServiceImpl implements ICourseService{
 		return courseDao.findAllCourses();
 	}
 	
+	public List<CourseDTO> getAllCoursesByTeacher(int teacherID)
+	{
+		return courseDao.findAllCoursesByTeacher(teacherID);
+	}
+	
 	@Transactional
 	public Student_Course_Mapping addStudentCourse(Student_Course_MappingDTO student_Course_MappingDTO) {
 //		

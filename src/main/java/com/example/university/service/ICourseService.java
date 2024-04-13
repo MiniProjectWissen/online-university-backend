@@ -21,6 +21,7 @@ public interface ICourseService {
 	public void incrementLectureCount(Integer courseId);
 
 	public List<CourseDTO> getAllCourses();
+	public List<CourseDTO> getAllCoursesByTeacher(int teacherId);
 	
 	public Student_Course_Mapping addStudentCourse(Student_Course_MappingDTO student_Course_MappingDTO);
 	public void incrementStudentAttendenceCount(int stud_id,int course_id);
