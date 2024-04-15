@@ -7,7 +7,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.example.university.dto.CourseDTO;
-import com.example.university.dto.StudentDTO;
 import com.example.university.dto.Student_Course_MappingDTO;
 import com.example.university.entity.Course;
 import com.example.university.entity.Student_Course_Mapping;
@@ -22,8 +21,6 @@ public interface ICourseService {
 	public void incrementLectureCount(Integer courseId);
 
 	public List<CourseDTO> getAllCourses();
-	public List<CourseDTO> getAllCoursesByTeacher(int teacherId);
-	public List<StudentDTO> getAllStudentsByCourse(int courseId);
 	
 	public Student_Course_Mapping addStudentCourse(Student_Course_MappingDTO student_Course_MappingDTO);
 	public void incrementStudentAttendenceCount(int stud_id,int course_id);

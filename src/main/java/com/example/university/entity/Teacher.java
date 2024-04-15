@@ -7,8 +7,6 @@ import java.util.List;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import com.example.university.dto.CourseDTO;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -45,7 +43,7 @@ public class Teacher {
 	
 	@OneToMany(mappedBy = "teacher",targetEntity = Course.class,cascade = CascadeType.ALL)
 	@OnDelete(action = OnDeleteAction.CASCADE)
-	private List<CourseDTO> courses;
+	private List<Course> courses;
 
 	public int getTeacher_id() {
 		return teacher_id;
@@ -135,11 +133,11 @@ public class Teacher {
 		this.is_admin = isAdmin;
 	}
 
-	public List<CourseDTO> getCourses() {
+	public List<Course> getCourses() {
 		return courses;
 	}
 
-	public void setCourses(List<CourseDTO> courses) {
+	public void setCourses(List<Course> courses) {
 		this.courses = courses;
 	}
 

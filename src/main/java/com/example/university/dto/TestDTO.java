@@ -1,6 +1,5 @@
 package com.example.university.dto;
 
-import java.sql.Date;
 import java.sql.Time;
 
 import lombok.AllArgsConstructor;
@@ -17,15 +16,15 @@ import lombok.Setter;
 public class TestDTO {
 	
 	private int test_id;
-	private Date start_time;
-	private Date end_time;
+	private Time start_time;
+	private Time end_time;
 	private int total_marks;
 	private String test_content;
 	private int course_id;
 	
 	
 	
-	public TestDTO(int test_id, Date start_time, Date end_time, int total_marks, String test_content, int course_id) {
+	public TestDTO(int test_id, Time start_time, Time end_time, int total_marks, String test_content, int course_id) {
 		super();
 		this.test_id = test_id;
 		this.start_time = start_time;
@@ -40,16 +39,16 @@ public class TestDTO {
 	public void setTest_id(int test_id) {
 		this.test_id = test_id;
 	}
-	public Date getStart_time() {
+	public Time getStart_time() {
 		return start_time;
 	}
-	public void setStart_time(Date start_time) {
+	public void setStart_time(Time start_time) {
 		this.start_time = start_time;
 	}
-	public Date getEnd_time() {
+	public Time getEnd_time() {
 		return end_time;
 	}
-	public void setEnd_time(Date end_time) {
+	public void setEnd_time(Time end_time) {
 		this.end_time = end_time;
 	}
 	public int getTotal_marks() {

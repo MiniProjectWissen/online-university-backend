@@ -11,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,8 +25,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.university.dto.StudentDTO;
 import com.example.university.dto.Student_Course_MappingDTO;
 import com.example.university.dto.Student_Test_MappingDTO;
+import com.example.university.entity.StudentCourseKey;
 import com.example.university.service.ICourseService;
-import com.example.university.exception.InvalidCourseException;
 import com.example.university.exception.InvalidDataValidationException;
 import com.example.university.exception.InvalidStudentException;
 import com.example.university.service.IStudentService;
@@ -37,8 +36,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/student")
-
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin("http://localhost:4200")
 public class StudentController {
 
 	@Autowired
@@ -51,14 +49,10 @@ public class StudentController {
 	private ITestService testService;
 	
 	@GetMapping("/get/all")
-	public ResponseEntity<Object> listAllStudents() {
+	public ResponseEntity<Object> listAllCourses() {
 		return new ResponseEntity<>(studentService.getAllStudents(), HttpStatus.OK);
 	}
 	
-	@GetMapping("/get/enrollCourses/{stud_id}")
-	public ResponseEntity<Object> listAllCourses(@PathVariable int stud_id) {
-		return new ResponseEntity<>(studentService.getAllEnrolledCourses(stud_id), HttpStatus.OK);
-	}
 	@PostMapping("/add")
 	public ResponseEntity<Object> addStudent(@Valid @RequestBody StudentDTO s, BindingResult bindingResult)
 	{
@@ -70,15 +64,12 @@ public class StudentController {
 			for(FieldError fe : fieldErrors) {
 				errMessage.add(fe.getDefaultMessage());
 			}
-//			System.out.println(errMessage);
 			throw new InvalidDataValidationException(errMessage);
 		}
 		
 		try {
 			studentService.addStudent(s);
-
 			return new ResponseEntity<>(Collections.singletonMap("msg","Student added successfully"), HttpStatus.OK);
-
 			
 		} catch (InvalidStudentException e) {
 
@@ -112,7 +103,7 @@ public class StudentController {
 		
 	}
 	
-	@DeleteMapping("/delete/{studId}")
+	@DeleteMapping("/delete/{course_id}")
 	public ResponseEntity<Object> deleteStudent(@PathVariable Integer studId)
 	{
 		try {
@@ -136,29 +127,7 @@ public class StudentController {
 		
 	}
 	
-	@GetMapping("/getEmail/{email}")
-	public ResponseEntity<Object> findByStudentEmail(@PathVariable String email)
-	{
-		try {
-			return new ResponseEntity<>(studentService.findByStudentEmail(email), HttpStatus.OK);
-			
-		} catch (InvalidStudentException e) {
-			throw  new InvalidStudentException(e.getMessage()+"Stud Id error");
-		}
-		
-	}
 	
-	@GetMapping("/getStudentsByCourse/{course_id}")
-	public ResponseEntity<Object> findStudentsByCourse(@PathVariable Integer course_id)
-	{
-		try {
-			return new ResponseEntity<>(courseService.getAllStudentsByCourse(course_id), HttpStatus.OK);
-		}
-		catch (InvalidCourseException e) {
-			throw new InvalidCourseException(e.getMessage()+" Course Id error");
-		}
-		
-	}
 	@PostMapping("/enrollCourse")
 	public ResponseEntity<Object> addStudentCourseEntry(@RequestBody Student_Course_MappingDTO student_Course_MappingDTO){
 		courseService.addStudentCourse(student_Course_MappingDTO);
@@ -177,8 +146,6 @@ public class StudentController {
 		return new ResponseEntity<>(courseService.getCourseAttendence(stud_id,course_id)
 ,HttpStatus.OK);
 	}
-	
-	
 	
 }
 

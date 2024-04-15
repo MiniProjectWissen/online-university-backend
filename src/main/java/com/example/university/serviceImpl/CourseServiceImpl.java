@@ -1,6 +1,5 @@
 package com.example.university.serviceImpl;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -13,7 +12,6 @@ import com.example.university.dao.IStudentDao;
 import com.example.university.dao.ITeacherDao;
 import com.example.university.dao.Student_Course_MappingDao;
 import com.example.university.dto.CourseDTO;
-import com.example.university.dto.StudentDTO;
 import com.example.university.dto.Student_Course_MappingDTO;
 import com.example.university.entity.Course;
 import com.example.university.entity.Student;
@@ -36,8 +34,6 @@ public class CourseServiceImpl implements ICourseService{
 	
 	@Autowired
 	IStudentDao studentDao;
-	
-	
 	
 	@Autowired
 	Student_Course_MappingDao student_Course_MappingDao;
@@ -123,18 +119,19 @@ public class CourseServiceImpl implements ICourseService{
 		return courseDao.findAllCourses();
 	}
 	
-	public List<CourseDTO> getAllCoursesByTeacher(int teacherID)
-	{
-		return courseDao.findAllCoursesByTeacher(teacherID);
-	}
-	
 	@Transactional
 	public Student_Course_Mapping addStudentCourse(Student_Course_MappingDTO student_Course_MappingDTO) {
-//		
-//		Student s = studentDao.findById(student_Course_MappingDTO.getId().getStud_id()).get();
-//		Course c = courseDao.findById(student_Course_MappingDTO.getId().getCourse_id()).get();
-
-
+		
+		Student s = studentDao.findById(student_Course_MappingDTO.getId().getStud_id()).get();
+		Course c = courseDao.findById(student_Course_MappingDTO.getId().getCourse_id()).get();
+		Set<Course> my_course_list=s.getCourses();
+		my_course_list.add(c);
+		s.setCourses(my_course_list);
+		
+		Set<Student> course_student_list=c.getStudents();
+		course_student_list.add(s);
+		c.setStudents(course_student_list);
+		
 		if(!student_Course_MappingDao.existsById(student_Course_MappingDTO.getId())) {
 			
 			Student_Course_Mapping scm = new Student_Course_Mapping();
@@ -172,17 +169,6 @@ public class CourseServiceImpl implements ICourseService{
 			return roundedValue;
 //		}
 //		return 0.0;
-	}
-	
-	public List<StudentDTO> getAllStudentsByCourse(int course_id) {
-		List<Student_Course_Mapping> list = student_Course_MappingDao.findAll();
-		List<Integer> l1 = new ArrayList<Integer>();
-		for(Student_Course_Mapping scm: list ) {
-			if(scm.getId().getCourse_id()==course_id)
-				l1.add(scm.getId().getStud_id());
-		}
-		System.out.println(list);
-		return studentDao.findAllStudentByCourse(l1);
 	}
 
 

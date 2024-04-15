@@ -1,6 +1,5 @@
 package com.example.university.entity;
 
-import java.sql.Date;
 import java.sql.Time;
 import java.util.HashSet;
 import java.util.Set;
@@ -31,8 +30,8 @@ public class Test {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int test_id;
-	private Date start_time;
-	private Date end_time;
+	private Time start_time;
+	private Time end_time;
 	private int total_marks;
 	private String test_content;
 	
@@ -62,19 +61,19 @@ public class Test {
 		this.test_id = test_id;
 	}
 
-	public Date getStart_time() {
+	public Time getStart_time() {
 		return start_time;
 	}
 
-	public void setStart_time(Date start_time) {
+	public void setStart_time(Time start_time) {
 		this.start_time = start_time;
 	}
 
-	public Date getEnd_time() {
+	public Time getEnd_time() {
 		return end_time;
 	}
 
-	public void setEnd_time(Date end_time) {
+	public void setEnd_time(Time end_time) {
 		this.end_time = end_time;
 	}
 

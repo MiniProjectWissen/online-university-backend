@@ -2,7 +2,6 @@ package com.example.university.dto;
 
 import java.sql.Date;
 
-import jakarta.validation.constraints.Max;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -23,13 +22,10 @@ public class StudentDTO {
 	private String email;
 	private String password;
 	private String address;
-	
 	private String phone_number;
 	private String gender;
 	private Date dob;
-	
 	private String roll_no;
-	@Max(value=3,message="expected standard betwwen 1-3")
 	private int standard;
 	
 	public StudentDTO() {}
