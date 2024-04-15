@@ -51,6 +51,15 @@ public class TeacherServiceImpl implements ITeacherService {
 		}	
 	}
 	
+	public TeacherDTO getTeacherByEmail(String email) {
+		if(teacherDao.existsByEmail(email)) {
+			return teacherDao.findByEmail(email);
+		}
+		else {
+			throw new InvalidTeacherException();
+		}	
+	}
+	
 	public List<TeacherDTO> getAllTeachers(){
 		return teacherDao.findAllTeacher();
 	}
