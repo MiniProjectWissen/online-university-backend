@@ -27,6 +27,7 @@ import com.example.university.dto.StudentDTO;
 import com.example.university.dto.Student_Course_MappingDTO;
 import com.example.university.dto.Student_Test_MappingDTO;
 import com.example.university.service.ICourseService;
+import com.example.university.exception.InvalidCourseException;
 import com.example.university.exception.InvalidDataValidationException;
 import com.example.university.exception.InvalidStudentException;
 import com.example.university.service.IStudentService;
@@ -143,6 +144,18 @@ public class StudentController {
 			
 		} catch (InvalidStudentException e) {
 			throw  new InvalidStudentException(e.getMessage()+"Stud Id error");
+		}
+		
+	}
+	
+	@GetMapping("/getStudentsByCourse/{course_id}")
+	public ResponseEntity<Object> findStudentsByCourse(@PathVariable Integer course_id)
+	{
+		try {
+			return new ResponseEntity<>(courseService.getAllStudentsByCourse(course_id), HttpStatus.OK);
+		}
+		catch (InvalidCourseException e) {
+			throw new InvalidCourseException(e.getMessage()+" Course Id error");
 		}
 		
 	}

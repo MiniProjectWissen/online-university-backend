@@ -1,5 +1,6 @@
 package com.example.university.serviceImpl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -171,6 +172,17 @@ public class CourseServiceImpl implements ICourseService{
 			return roundedValue;
 //		}
 //		return 0.0;
+	}
+	
+	public List<StudentDTO> getAllStudentsByCourse(int course_id) {
+		List<Student_Course_Mapping> list = student_Course_MappingDao.findAll();
+		List<Integer> l1 = new ArrayList<Integer>();
+		for(Student_Course_Mapping scm: list ) {
+			if(scm.getId().getCourse_id()==course_id)
+				l1.add(scm.getId().getStud_id());
+		}
+		System.out.println(list);
+		return studentDao.findAllStudentByCourse(l1);
 	}
 
 
