@@ -82,7 +82,7 @@ public class StudentController {
 			
 		} catch (InvalidStudentException e) {
 
-			throw  new InvalidStudentException(e.getMessage()+"add student error ");
+			throw  new InvalidStudentException(e.getMessage()+" add student error ");
 
 		}
 		

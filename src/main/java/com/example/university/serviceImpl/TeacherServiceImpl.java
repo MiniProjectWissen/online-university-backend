@@ -7,9 +7,11 @@ import org.springframework.stereotype.Service;
 
 import com.example.university.dao.ITeacherDao;
 import com.example.university.dto.TeacherDTO;
+import com.example.university.dto.UserDTO;
 import com.example.university.entity.Teacher;
 import com.example.university.exception.InvalidStudentException;
 import com.example.university.exception.InvalidTeacherException;
+import com.example.university.external.service.AuthService;
 import com.example.university.service.ITeacherService;
 
 @Service
@@ -18,7 +20,8 @@ public class TeacherServiceImpl implements ITeacherService {
 	@Autowired
 	private ITeacherDao teacherDao;
 	
-	
+	@Autowired
+	private AuthService authService;
 	
 	
 	public Teacher createTeacher(TeacherDTO teacherDto) {
@@ -36,6 +39,15 @@ public class TeacherServiceImpl implements ITeacherService {
 			teacher.setPhone_number(teacher.getPhone_number());
 			teacher.setPosition(teacherDto.getPosition());
 			teacher.setIsAdmin(0);
+			
+			try {
+				
+				UserDTO userDTO = new UserDTO(teacherDto.getEmail(),teacherDto.getPassword(),"Teacher");
+				authService.addUser(userDTO);
+				
+			} catch (Exception e) {
+				throw new InvalidStudentException("Error in AuthMicroService");
+			}
 		
 			return teacherDao.save(teacher);
 		//}
