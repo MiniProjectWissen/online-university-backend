@@ -9,19 +9,20 @@ import org.springframework.stereotype.Service;
 
 import com.example.university.dao.ICourseDao;
 import com.example.university.dao.IStudentDao;
-
+import com.example.university.dao.ITestDao;
 import com.example.university.dao.Student_Course_MappingDao;
-
+import com.example.university.dao.Student_Test_MappingDao;
 import com.example.university.dto.CourseDTO;
 import com.example.university.dto.StudentDTO;
 
 import com.example.university.dto.Student_Course_MappingDTO;
-
+import com.example.university.dto.TestDTO;
 import com.example.university.dto.UserDTO;
 
 import com.example.university.entity.Course;
 import com.example.university.entity.Student;
 import com.example.university.entity.Student_Course_Mapping;
+import com.example.university.entity.Student_Test_Mapping;
 import com.example.university.exception.InvalidCourseException;
 import com.example.university.exception.InvalidStudentException;
 import com.example.university.external.service.AuthService;
@@ -43,6 +44,12 @@ public class StudentServiceImpl implements IStudentService {
 
 	@Autowired
 	private AuthService authService;
+	
+	@Autowired
+	private Student_Test_MappingDao stmDao;
+	
+	@Autowired
+	private ITestDao testDao;
 
 	@Override
 	public Student addStudent(StudentDTO studentDto) {
@@ -152,6 +159,26 @@ public class StudentServiceImpl implements IStudentService {
 		}
 		System.out.println(list);
 		return courseDao.findAllCoursesByStudent(l1);
+	}
+	
+	public List<TestDTO> getTestsByStudId(Integer stud_id)
+	{
+		List<Student_Test_Mapping> list=stmDao.findAll();
+		List<Integer> l1=new ArrayList<Integer>();
+		for(Student_Test_Mapping stm:list)
+		{
+			if (stm.getId().getStud_id()==stud_id)
+			{
+				l1.add(stm.getId().getTest_id());
+			}
+		}
+		System.out.print(l1);
+		return testDao.findAllTestById(l1);
+	}
+	
+	public int getMarksByStudIdTestId(Integer stud_id,Integer test_id)
+	{
+		return stmDao.findByStudIdTestId(stud_id, test_id);
 	}
 
 }

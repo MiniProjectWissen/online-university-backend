@@ -159,6 +159,19 @@ public class StudentController {
 		}
 		
 	}
+	
+	@GetMapping("/getTestsByStudent/{stud_id}")
+	public ResponseEntity<Object> findTestsByStudent(@PathVariable Integer stud_id)
+	{
+		try {
+			return new ResponseEntity<>(studentService.getTestsByStudId(stud_id), HttpStatus.OK);
+		}
+		catch (InvalidCourseException e) {
+			throw new InvalidCourseException(e.getMessage()+" Stud Id error");
+		}
+		
+	}
+	
 	@PostMapping("/enrollCourse")
 	public ResponseEntity<Object> addStudentCourseEntry(@RequestBody Student_Course_MappingDTO student_Course_MappingDTO){
 		courseService.addStudentCourse(student_Course_MappingDTO);
@@ -178,7 +191,12 @@ public class StudentController {
 ,HttpStatus.OK);
 	}
 	
-	
+	@GetMapping("/getMarks/{stud_id}/{test_id}")
+	public ResponseEntity<Object> getMarksByStudIdTestId(@PathVariable int stud_id,@PathVariable int test_id)
+	{
+		return new ResponseEntity<>(studentService.getMarksByStudIdTestId(stud_id, test_id),
+				HttpStatus.OK);
+	}
 	
 }
 

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.university.dto.CourseDTO;
 import com.example.university.dto.StudentDTO;
+import com.example.university.dto.TestDTO;
 import com.example.university.entity.Course;
 import com.example.university.entity.Student;
 
@@ -28,5 +29,8 @@ public interface IStudentService {
 
 
 	void deleteStudentByStudentId(Integer stud_id);
-
+	
+	public List<TestDTO> getTestsByStudId(Integer stud_id);
+	
+	public int getMarksByStudIdTestId(Integer stud_id,Integer test_id);
 }
