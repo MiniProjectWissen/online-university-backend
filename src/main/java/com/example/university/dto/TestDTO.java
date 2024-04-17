@@ -24,7 +24,6 @@ public class TestDTO {
 	private int course_id;
 	
 	
-	
 	public TestDTO(int test_id, Date start_time, Date end_time, int total_marks, String test_content, int course_id) {
 		super();
 		this.test_id = test_id;

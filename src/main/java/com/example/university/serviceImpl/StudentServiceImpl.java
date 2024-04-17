@@ -14,12 +14,17 @@ import com.example.university.dao.Student_Course_MappingDao;
 
 import com.example.university.dto.CourseDTO;
 import com.example.university.dto.StudentDTO;
+
 import com.example.university.dto.Student_Course_MappingDTO;
+
+import com.example.university.dto.UserDTO;
+
 import com.example.university.entity.Course;
 import com.example.university.entity.Student;
 import com.example.university.entity.Student_Course_Mapping;
 import com.example.university.exception.InvalidCourseException;
 import com.example.university.exception.InvalidStudentException;
+import com.example.university.external.service.AuthService;
 import com.example.university.service.IStudentService;
 
 
@@ -30,10 +35,14 @@ public class StudentServiceImpl implements IStudentService {
 	private IStudentDao studentDao;
 	
 	@Autowired
+
 	private ICourseDao courseDao;
 	
 	@Autowired
 	private Student_Course_MappingDao scmDao;
+
+	@Autowired
+	private AuthService authService;
 
 	@Override
 	public Student addStudent(StudentDTO studentDto) {
@@ -51,6 +60,15 @@ public class StudentServiceImpl implements IStudentService {
 			student.setPhone_number(studentDto.getPhone_number());
 			student.setRoll_no(studentDto.getRoll_no());
 			student.setStandard(studentDto.getStandard());
+			
+			try {
+				
+				UserDTO userDTO = new UserDTO(studentDto.getEmail(),studentDto.getPassword(),"Student");
+				authService.addUser(userDTO);
+				
+			} catch (Exception e) {
+				throw new InvalidStudentException(e+ " Error in AuthMicroService");
+			}
 			
 			return studentDao.save(student);
 		}
