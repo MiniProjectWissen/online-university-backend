@@ -19,6 +19,11 @@ public class StudentTestKey implements Serializable{
 	private int stud_id;
 	private int test_id;
 	
+	public StudentTestKey()
+	{
+	
+	}
+	
 	public StudentTestKey(int stud_id, int test_id) {
 		super();
 		this.stud_id = stud_id;
