@@ -1,8 +1,13 @@
 package com.example.university.serviceImpl;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
+import java.util.TimeZone;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
@@ -13,6 +18,8 @@ import com.example.university.dao.IStudentDao;
 import com.example.university.dao.ITeacherDao;
 import com.example.university.dao.Student_Course_MappingDao;
 import com.example.university.dto.CourseDTO;
+//import com.example.university.dto.ForumDTO;
+import com.example.university.dto.MessageDTO;
 import com.example.university.dto.StudentDTO;
 import com.example.university.dto.Student_Course_MappingDTO;
 import com.example.university.entity.Course;
@@ -21,6 +28,7 @@ import com.example.university.entity.StudentCourseKey;
 import com.example.university.entity.Student_Course_Mapping;
 import com.example.university.entity.Teacher;
 import com.example.university.exception.InvalidCourseException;
+import com.example.university.external.service.ForumService;
 import com.example.university.service.ICourseService;
 
 import jakarta.transaction.Transactional;
@@ -41,12 +49,37 @@ public class CourseServiceImpl implements ICourseService{
 	
 	@Autowired
 	Student_Course_MappingDao student_Course_MappingDao;
+	
+	@Autowired
+	ForumService forumService;
 
 	@Override
 	public Course addCourse(CourseDTO courseDTO)
 	{	
 		Course course =new Course();
-		course.setForum_id(courseDTO.getForum_id());
+		
+	    int forumId = UUID.randomUUID().hashCode();;
+	    course.setForum_id(forumId); 
+	    
+	    Teacher t=teacherDao.findById(courseDTO.getTeacher_id()).get();
+		course.setTeacher(t);
+	    
+		Timestamp now = new Timestamp(System.currentTimeMillis());
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+		TimeZone istTimeZone = TimeZone.getTimeZone("Asia/Kolkata");
+		sdf.setTimeZone(istTimeZone);
+		String istTime = sdf.format(now);
+		Timestamp istTimestamp = Timestamp.valueOf(istTime);
+        		    
+        
+        MessageDTO msg = new MessageDTO(forumId, t.getTeacher_id(), t.getFirst_name(), "Welcome to forum", istTimestamp);
+	    forumService.sendMessage(msg);
+	    
+	
+        
+	   
+	    
+		
 		course.setTitle(courseDTO.getTitle());
 		course.setDescription(courseDTO.getDescription());
 		course.setStart_date(courseDTO.getStart_date());
@@ -56,11 +89,12 @@ public class CourseServiceImpl implements ICourseService{
 		course.setJoin_time(courseDTO.getJoin_time());
 		course.setEnd_time(courseDTO.getEnd_time());
 		course.setLectures_taken(courseDTO.getLectures_taken());
-		Teacher t=teacherDao.findById(courseDTO.getTeacher_id()).get();
-		course.setTeacher(t);
+		
 		return courseDao.save(course);
 	}
 	
+	
+
 	@Override
 	public Course updateCourse(Integer userId,CourseDTO courseDTO)
 	{
