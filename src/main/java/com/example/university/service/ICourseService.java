@@ -5,11 +5,13 @@ import java.util.List;
 
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.university.dto.CourseDTO;
 import com.example.university.dto.StudentDTO;
 import com.example.university.dto.Student_Course_MappingDTO;
 import com.example.university.entity.Course;
+import com.example.university.entity.DatabaseFile;
 import com.example.university.entity.Student_Course_Mapping;
 
 @Service
@@ -28,6 +30,8 @@ public interface ICourseService {
 	public Student_Course_Mapping addStudentCourse(Student_Course_MappingDTO student_Course_MappingDTO);
 	public void incrementStudentAttendenceCount(int stud_id,int course_id);
 	public double getCourseAttendence(int stud_id,int course_id);
+	public DatabaseFile storeFile(MultipartFile file);
+	public DatabaseFile getFile(String fileName);
 	
 
 }
