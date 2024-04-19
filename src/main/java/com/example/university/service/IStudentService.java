@@ -33,4 +33,6 @@ public interface IStudentService {
 	public List<TestDTO> getTestsByStudId(Integer stud_id);
 	
 	public int getMarksByStudIdTestId(Integer stud_id,Integer test_id);
+	
+	public void updateMarksByStudIdTestId(Integer stud_id,Integer test_id,Integer marks);
 }

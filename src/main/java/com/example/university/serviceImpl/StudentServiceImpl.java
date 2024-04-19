@@ -2,9 +2,11 @@ package com.example.university.serviceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
 import com.example.university.dao.ICourseDao;
@@ -14,7 +16,7 @@ import com.example.university.dao.Student_Course_MappingDao;
 import com.example.university.dao.Student_Test_MappingDao;
 import com.example.university.dto.CourseDTO;
 import com.example.university.dto.StudentDTO;
-
+import com.example.university.entity.StudentTestKey;
 import com.example.university.dto.Student_Course_MappingDTO;
 import com.example.university.dto.TestDTO;
 import com.example.university.dto.UserDTO;
@@ -27,6 +29,8 @@ import com.example.university.exception.InvalidCourseException;
 import com.example.university.exception.InvalidStudentException;
 import com.example.university.external.service.AuthService;
 import com.example.university.service.IStudentService;
+
+import jakarta.transaction.Transactional;
 
 
 @Service
@@ -181,4 +185,15 @@ public class StudentServiceImpl implements IStudentService {
 		return stmDao.findByStudIdTestId(stud_id, test_id);
 	}
 
+
+	@Modifying
+	@Transactional
+	public void updateMarksByStudIdTestId(Integer stud_id,Integer test_id,Integer marks)
+	{
+		StudentTestKey stk=new StudentTestKey(stud_id,test_id);
+		Student_Test_Mapping stm=stmDao.findById(stk).get();
+		stm.setMarks(marks);
+		
+		stmDao.save(stm);
+	}
 }

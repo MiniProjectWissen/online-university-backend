@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.university.dto.TeacherDTO;
 import com.example.university.service.ICourseService;
+import com.example.university.service.IStudentService;
 import com.example.university.exception.InvalidDataValidationException;
 import com.example.university.exception.InvalidTeacherException;
 import com.example.university.service.ITeacherService;
@@ -35,6 +36,9 @@ import jakarta.validation.Valid;
 public class TeacherController {
 	@Autowired
 	ITeacherService teacherService;
+	
+	@Autowired
+	IStudentService studentService;
 	
 	
 	@Autowired
@@ -147,5 +151,12 @@ public class TeacherController {
 	public ResponseEntity<Object> incrementAttendence(@PathVariable int stud_id,@PathVariable int course_id){
 		courseService.incrementStudentAttendenceCount(stud_id,course_id);
 		return new ResponseEntity<>(Collections.singletonMap("msg","Student attendance incremented successfully"), HttpStatus.OK);
+	}
+	
+	@PutMapping("/updateMarks/{stud_id}/{test_id}/{marks}")
+	public ResponseEntity<Object> updateMarks(@PathVariable int stud_id,@PathVariable int test_id,@PathVariable int marks)
+	{
+		studentService.updateMarksByStudIdTestId(stud_id, test_id, marks);
+		return new ResponseEntity<>(Collections.singletonMap("msg","Student marks updated successfully"), HttpStatus.OK);
 	}
 }

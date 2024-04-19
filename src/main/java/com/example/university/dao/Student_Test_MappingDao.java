@@ -13,4 +13,5 @@ public interface Student_Test_MappingDao extends JpaRepository<Student_Test_Mapp
 	@Query("SELECT stm.marks FROM Student_Test_Mapping stm WHERE stm.id.stud_id = :stud_id AND stm.id.test_id = :test_id")
 	int findByStudIdTestId(@Param("stud_id") int stud_id, @Param("test_id") int test_id);
 
+	
 }

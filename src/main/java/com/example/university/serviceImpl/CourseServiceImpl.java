@@ -16,7 +16,6 @@ import com.example.university.dto.CourseDTO;
 import com.example.university.dto.StudentDTO;
 import com.example.university.dto.Student_Course_MappingDTO;
 import com.example.university.entity.Course;
-import com.example.university.entity.Student;
 import com.example.university.entity.StudentCourseKey;
 import com.example.university.entity.Student_Course_Mapping;
 import com.example.university.entity.Teacher;
