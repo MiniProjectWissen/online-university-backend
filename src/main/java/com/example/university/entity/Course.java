@@ -1,6 +1,7 @@
 package com.example.university.entity;
 
 import java.sql.Time;
+import java.util.Base64;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -10,12 +11,14 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -43,6 +46,8 @@ public class Course {
 	private Date start_date;
 	private Date end_date;
 	private String sch_days;
+	@Lob
+    @Column(columnDefinition = "LONGTEXT")
 	private String syllabus;
 	private Time join_time;
 	private Time end_time;
@@ -118,6 +123,8 @@ public class Course {
 	public void setSch_days(String sch_days) {
 		this.sch_days = sch_days;
 	}
+
+	
 
 	public String getSyllabus() {
 		return syllabus;
