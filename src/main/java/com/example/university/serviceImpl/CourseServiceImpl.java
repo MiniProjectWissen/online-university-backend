@@ -1,7 +1,9 @@
 package com.example.university.serviceImpl;
 
+
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -12,7 +14,10 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.example.university.dao.DatabaseFileRepository;
 import com.example.university.dao.ICourseDao;
 import com.example.university.dao.IStudentDao;
 import com.example.university.dao.ITeacherDao;
@@ -23,6 +28,7 @@ import com.example.university.dto.MessageDTO;
 import com.example.university.dto.StudentDTO;
 import com.example.university.dto.Student_Course_MappingDTO;
 import com.example.university.entity.Course;
+import com.example.university.entity.DatabaseFile;
 import com.example.university.entity.Student;
 import com.example.university.entity.StudentCourseKey;
 import com.example.university.entity.Student_Course_Mapping;
@@ -220,4 +226,28 @@ public class CourseServiceImpl implements ICourseService{
 	}
 
 
+	
+	
+	 @Autowired
+	    private DatabaseFileRepository dbFileRepository;
+
+	    public DatabaseFile storeFile(MultipartFile file) {
+	        // Normalize file name
+	        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+
+	        try {
+	            
+
+	            DatabaseFile dbFile = new DatabaseFile(fileName, file.getContentType(), file.getBytes());
+
+	            return dbFileRepository.save(dbFile);
+	        } catch (IOException ex) {
+	            System.out.println(ex.getMessage());
+	        }
+	        return null;
+	    }
+
+	    public DatabaseFile getFile(String fileName) {
+	        return (DatabaseFile) dbFileRepository.findByFileName(fileName);
+	    }
 }

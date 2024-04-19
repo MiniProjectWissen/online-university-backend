@@ -20,8 +20,8 @@ public class Student_Test_Mapping {
 	@EmbeddedId
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private StudentTestKey id;
-	@Column(nullable = true)
-	//@Column(name = "marks", columnDefinition = "int default 0")
+	
+	@Column(name = "marks", columnDefinition = "int default 0")
 	private int marks;
 
 	
@@ -33,7 +33,7 @@ public class Student_Test_Mapping {
 	public Student_Test_Mapping(StudentTestKey id, int marks) {
 		super();
 		this.id = id;
-		this.marks = marks;
+		this.marks = 0;
 	}
 
 	public StudentTestKey getId() {

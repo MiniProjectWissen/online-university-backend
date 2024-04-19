@@ -19,5 +19,7 @@ public interface ITestService {
 	public List<TestDTO> getAllTests();
 	
 	public Student_Test_Mapping addStudentTest(Student_Test_MappingDTO student_Test_MappingDTO);
+	
+	public List<TestDTO> getTestsByCourse(Integer course_id);
 
 }

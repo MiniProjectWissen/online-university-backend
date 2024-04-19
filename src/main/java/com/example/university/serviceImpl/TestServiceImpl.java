@@ -114,4 +114,9 @@ public class TestServiceImpl implements ITestService{
 		}
 		return null;
 	}
+	
+	public List<TestDTO> getTestsByCourse(Integer course_id)
+	{
+		return testDao.findAllTestsByCourse(course_id);
+	}
 }

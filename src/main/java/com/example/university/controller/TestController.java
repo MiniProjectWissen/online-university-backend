@@ -115,6 +115,14 @@ public class TestController {
 		}
 	}
 	
-	
-	
+	@GetMapping("/get/alltests/{course_id}")
+	public ResponseEntity<Object> findTestsByCourse(@PathVariable Integer course_id)
+	{
+		try {
+			return new ResponseEntity<>(testService.getTestsByCourse(course_id), HttpStatus.OK);
+		}
+		catch (InvalidTestException e) {
+			throw new InvalidTestException(e.getMessage()+" Test Id error");
+		}
+	}
 }
