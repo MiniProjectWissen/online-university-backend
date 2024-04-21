@@ -4,7 +4,9 @@ package com.example.university.entity;
 
 
 import java.sql.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -49,10 +51,18 @@ public class Student {
 	@ManyToMany(targetEntity = Course.class, cascade = { CascadeType.MERGE, CascadeType.PERSIST,
 			CascadeType.REFRESH })
 	@OnDelete(action = OnDeleteAction.CASCADE)
-	@JoinTable(name = "Student_Course_Mapping", joinColumns = @JoinColumn(name = "stud_id"), inverseJoinColumns = @JoinColumn(name = "course_id"))
+	//@JoinTable(name = "Student_Course_Mapping", joinColumns = @JoinColumn(name = "stud_id"), inverseJoinColumns = @JoinColumn(name = "course_id"))
 
-	private List<Course> courses;
+    private Set<Course> courses = new HashSet<>();
+	
+	@ManyToMany(targetEntity = Test.class, cascade = { CascadeType.MERGE, CascadeType.PERSIST,
+			CascadeType.REFRESH })
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	//@JoinTable(name = "Student_Test_Mapping", joinColumns = @JoinColumn(name = "stud_id"), inverseJoinColumns = @JoinColumn(name = "test_id"))
 
+    private Set<Test> tests = new HashSet<>();
+
+	
 	public int getStud_id() {
 		return stud_id;
 	}
@@ -141,13 +151,19 @@ public class Student {
 		this.standard = standard;
 	}
 
-	public List<Course> getCourses() {
+	public Set<Course> getCourses() {
 		return courses;
 	}
 
-	public void setCourses(List<Course> courses) {
+	public void setCourses(Set<Course> courses) {
 		this.courses = courses;
 	}
 	
-	
+	public Set<Test> getTests() {
+		return tests;
+	}
+
+	public void setTests(Set<Test> tests) {
+		this.tests = tests;
+	}
 }

@@ -5,11 +5,13 @@ import java.util.List;
 
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.university.dto.CourseDTO;
+import com.example.university.dto.StudentDTO;
 import com.example.university.dto.Student_Course_MappingDTO;
 import com.example.university.entity.Course;
-import com.example.university.entity.StudentCourseKey;
+import com.example.university.entity.DatabaseFile;
 import com.example.university.entity.Student_Course_Mapping;
 
 @Service
@@ -22,10 +24,14 @@ public interface ICourseService {
 	public void incrementLectureCount(Integer courseId);
 
 	public List<CourseDTO> getAllCourses();
+	public List<CourseDTO> getAllCoursesByTeacher(int teacherId);
+	public List<StudentDTO> getAllStudentsByCourse(int courseId);
 	
 	public Student_Course_Mapping addStudentCourse(Student_Course_MappingDTO student_Course_MappingDTO);
-	public void incrementStudentAttendenceCount(StudentCourseKey id);
-	public Double getCourseAttendence(StudentCourseKey id);
+	public void incrementStudentAttendenceCount(int stud_id,int course_id);
+	public double getCourseAttendence(int stud_id,int course_id);
+	public DatabaseFile storeFile(MultipartFile file);
+	public DatabaseFile getFile(String fileName);
 	
 
 }

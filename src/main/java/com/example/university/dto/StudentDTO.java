@@ -2,7 +2,9 @@ package com.example.university.dto;
 
 import java.sql.Date;
 
+
 import jakarta.validation.constraints.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -30,17 +32,26 @@ public class StudentDTO {
 	private String password;
 	@NotBlank(message = "Address is required")
 	private String address;
+
 	@NotBlank(message = "Phone number is required")
     @Pattern(regexp = "^\\d{10}$", message = "Invalid phone number format")
+
+	
+
 	private String phone_number;
 	@NotBlank(message = "Gender is required")
 	@Pattern(regexp = "^(Male|Female)$", message = "Gender must be Male or Female")
 	private String gender;
 	private Date dob;
+
 	@Pattern(regexp = "^\\d{4}$", message = "Roll number must be 4 digits")
 	private String roll_no;
     @Min(value = 1, message = "Standard must be at least 1")
     @Max(value = 17, message = "Standard must be at most 17")
+
+	
+
+
 	private int standard;
 	
 	public StudentDTO() {}

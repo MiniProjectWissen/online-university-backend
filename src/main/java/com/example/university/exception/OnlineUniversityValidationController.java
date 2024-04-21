@@ -25,6 +25,6 @@ public class OnlineUniversityValidationController {
 	
 	@ExceptionHandler(value = InvalidDataValidationException.class)
 	public ResponseEntity<Object> handleException(InvalidDataValidationException exception) {
-		return new ResponseEntity<>(exception.getLocalizedMessage(), HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>(exception.getMsg(), HttpStatus.BAD_REQUEST);
 	}
 }

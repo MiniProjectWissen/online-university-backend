@@ -44,7 +44,7 @@ public class CourseDTO {
 	private  Time end_time;
 	private  int lectures_taken;
 	private  int teacher_id;
-	
+
 	
 	public CourseDTO(int course_id, int forum_id,
 			@NotBlank(message = "Title cannot be blank") @Size(max = 255, message = "Title must be at most 255 characters") String title,
@@ -53,6 +53,7 @@ public class CourseDTO {
 			@NotNull(message = "End date cannot be null") @FutureOrPresent(message = "End date must be in the past or present") Date end_date,
 			@NotBlank(message = "Schedule days cannot be blank") @Pattern(regexp = "^[01]{7}$", message = "Schedule days must be a 7-character string containing only '0' and '1' characters") String sch_days,
 			String syllabus, Time join_time, Time end_time, int lectures_taken, int teacher_id) {
+
 		super();
 		this.course_id = course_id;
 		this.forum_id = forum_id;

@@ -13,14 +13,21 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-public class StudentCourseKey implements Serializable{
+
+public class StudentTestKey implements Serializable{
+
 	private int stud_id;
-	private int course_id;
-	public StudentCourseKey() {}
-	public StudentCourseKey(int stud_id, int course_id) {
+	private int test_id;
+	
+	public StudentTestKey()
+	{
+	
+	}
+	
+	public StudentTestKey(int stud_id, int test_id) {
 		super();
 		this.stud_id = stud_id;
-		this.course_id = course_id;
+		this.test_id = test_id;
 	}
 	public int getStud_id() {
 		return stud_id;
@@ -28,11 +35,11 @@ public class StudentCourseKey implements Serializable{
 	public void setStud_id(int stud_id) {
 		this.stud_id = stud_id;
 	}
-	public int getCourse_id() {
-		return course_id;
+	public int getTest_id() {
+		return test_id;
 	}
-	public void setCourse_id(int course_id) {
-		this.course_id = course_id;
+	public void setTest_id(int test_id) {
+		this.test_id = test_id;
 	}
 	
 }
