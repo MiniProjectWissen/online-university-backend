@@ -29,7 +29,7 @@ public class StudentDTO {
 	private Date dob;
 	
 	private String roll_no;
-	@Max(value=3,message="expected standard betwwen 1-3")
+	@Max(value=30,message="expected standard betwwen 1-3")
 	private int standard;
 	
 	public StudentDTO() {}
